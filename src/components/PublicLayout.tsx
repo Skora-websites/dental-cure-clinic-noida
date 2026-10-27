@@ -33,20 +33,20 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <span className="inline-flex items-center justify-center gap-2"><Clock3 className="size-3.5 shrink-0" /> <span>Call for current availability and appointment times</span></span>
       </div>
       <header className="sticky top-0 z-50 border-b border-white/60 bg-[#fffdf8]/75 shadow-[0_8px_30px_-22px_rgba(15,118,110,0.5)] backdrop-blur-2xl backdrop-saturate-150">
-        <div className="page-container flex h-[72px] items-center justify-between gap-3 sm:h-[76px]">
+        <div className="page-container flex h-[72px] items-center justify-between gap-2 sm:h-[76px] sm:gap-3">
           <Link to="/" aria-label="Dental Cure Clinic home" className="shrink-0"><BrandLogo /></Link>
           <nav className="hidden items-center gap-6 xl:flex" aria-label="Main navigation">
             {navItems.map(([label, href]) => (
               <NavLink key={href} to={href} className={({ isActive }) => cn("text-sm font-semibold transition-colors hover:text-primary", isActive ? "text-primary" : "text-foreground/75")}>{label}</NavLink>
             ))}
           </nav>
-          <div className="hidden items-center gap-2 sm:flex">
-            <Button asChild variant="ghost" size="icon" aria-label="Call clinic"><a href={clinic.phoneHref}><Phone className="size-4" /></a></Button>
-            <Button asChild className="rounded-full bg-primary px-4 hover:bg-[#0b625c] sm:px-5"><Link to="/appointment">Book <span className="hidden sm:inline">appointment</span> <ArrowRight className="ml-1 size-4 sm:ml-2" /></Link></Button>
+          <div className="ml-auto flex shrink-0 items-center justify-end gap-1 sm:gap-2">
+            <Button asChild variant="ghost" className="size-9 sm:size-10" aria-label="Call clinic"><a href={clinic.phoneHref}><Phone className="size-4" /><span className="hidden sm:inline">Call</span></a></Button>
+            <Button asChild className="rounded-full bg-primary px-2.5 hover:bg-[#0b625c] sm:px-5"><Link to="/appointment">Book <span className="hidden sm:inline">appointment</span> <ArrowRight className="ml-1 hidden size-4 sm:ml-2 sm:block" /></Link></Button>
+            <button className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary xl:hidden sm:size-11" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
           </div>
-          <button className="grid size-11 shrink-0 place-items-center rounded-full bg-secondary xl:hidden" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
         </div>
         {open && (
           <div className="max-h-[calc(100vh-104px)] overflow-y-auto border-t border-white/60 bg-white/80 px-4 py-5 shadow-xl backdrop-blur-2xl xl:hidden">
@@ -58,7 +58,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         )}
       </header>
 
-      <main className="pb-20 sm:pb-0">{children}</main>
+      <main>{children}</main>
 
       <footer className="bg-[#123f3a] text-white">
         <div className="page-container grid gap-10 py-14 sm:py-16 md:grid-cols-2 md:gap-12 lg:grid-cols-4">
@@ -98,12 +98,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         </div>
       </footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-white/70 bg-white/75 px-3 py-2.5 shadow-[0_-10px_30px_-18px_rgba(15,118,110,0.5)] backdrop-blur-2xl backdrop-saturate-150 sm:hidden">
-        <a href={clinic.phoneHref} className="flex h-11 items-center justify-center gap-2 rounded-full border border-primary/25 bg-white text-sm font-bold text-primary"><Phone className="size-4" /> Call clinic</a>
-        <Link to="/appointment" className="flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-white">Book appointment <ArrowRight className="size-4" /></Link>
-      </div>
-
-      <a href={`https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent("Hello, I would like to enquire about an appointment at Dental Cure Clinic.")}`} target="_blank" rel="noreferrer" className="fixed bottom-[4.75rem] right-3 z-50 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_12px_32px_-8px_rgba(37,211,102,0.65)] transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 sm:bottom-5 sm:right-6 sm:size-14" aria-label="Chat with Dental Cure Clinic on WhatsApp">
+      <a href={`https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent("Hello, I would like to enquire about an appointment at Dental Cure Clinic.")}`} target="_blank" rel="noreferrer" className="fixed bottom-5 right-3 z-50 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_12px_32px_-8px_rgba(37,211,102,0.65)] transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 sm:right-6 sm:size-14" aria-label="Chat with Dental Cure Clinic on WhatsApp">
         <svg viewBox="0 0 24 24" className="size-7 fill-current" aria-hidden="true"><path d="M12.04 2A9.9 9.9 0 0 0 2.1 11.9c0 1.75.46 3.45 1.34 4.95L2 22l5.3-1.38a9.86 9.86 0 0 0 4.74 1.2h.01A9.9 9.9 0 0 0 12.04 2Zm0 18.05h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.18 8.18 0 0 1-1.26-4.4 8.2 8.2 0 0 1 8.22-8.2 8.2 8.2 0 0 1 8.21 8.2 8.2 8.2 0 0 1-8.21 8.24Zm4.5-6.14c-.25-.13-1.46-.72-1.68-.8-.23-.08-.39-.13-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23a7.5 7.5 0 0 1-1.38-1.72c-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.86-.87 2.08s.89 2.42 1.02 2.58c.12.17 1.76 2.69 4.27 3.77.6.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z" /></svg>
       </a>
     </PageMotion>
