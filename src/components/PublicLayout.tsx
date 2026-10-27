@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   ["About", "/about"], ["Services", "/services"], ["Dentists", "/dentists"], ["Offers", "/offers"],
-  ["Gallery", "/gallery"], ["Reviews", "/reviews"], ["Blog", "/blog"], ["FAQs", "/faqs"],
+  ["Gallery", "/gallery"], ["Reviews", "/reviews"], ["Blog", "/blog"], ["FAQs", "/faqs"], ["Contact", "/contact"],
 ];
 
 export function PageMeta({ title, description }: { title: string; description: string }) {
@@ -52,7 +52,6 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           <div className="max-h-[calc(100vh-104px)] overflow-y-auto border-t border-white/60 bg-white/80 px-4 py-5 shadow-xl backdrop-blur-2xl xl:hidden">
             <nav className="grid grid-cols-2 gap-2" aria-label="Mobile navigation">
               {navItems.map(([label, href]) => <Link key={href} to={href} className="rounded-xl bg-muted px-3 py-3 text-center text-sm font-semibold">{label}</Link>)}
-              <Link to="/contact" className="rounded-xl bg-muted px-3 py-3 text-center text-sm font-semibold">Contact</Link>
               <Link to="/appointment" className="col-span-2 rounded-xl bg-primary px-4 py-3 text-center text-sm font-semibold text-white">Book appointment</Link>
             </nav>
           </div>
@@ -71,7 +70,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           <div>
             <h3 className="font-display text-lg font-bold">Explore</h3>
             <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-white/65">
-              {navItems.map(([label, href]) => <Link key={href} to={href} className="hover:text-white">{label}</Link>)}
+              {navItems.map(([label, href]) => <Link key={href} to={href} className="transition-colors hover:text-white">{label}</Link>)}
             </div>
           </div>
           <div>
@@ -94,7 +93,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <div className="border-t border-white/10">
           <div className="page-container flex flex-col gap-3 py-5 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
             <p>© {new Date().getFullYear()} Dental Cure Clinic. All rights reserved.</p>
-            <div className="flex gap-5"><Link to="/privacy-policy">Privacy</Link><Link to="/terms">Terms</Link><Link to="/contact">Contact</Link></div>
+            <div className="flex flex-wrap gap-x-5 gap-y-2"><Link to="/privacy-policy" className="hover:text-white">Privacy</Link><Link to="/terms" className="hover:text-white">Terms</Link><Link to="/contact" className="hover:text-white">Contact</Link></div>
           </div>
         </div>
       </footer>
