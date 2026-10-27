@@ -1,8 +1,51 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Home } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { Button } from "@/components/ui/button";
+import { PageHero } from "@/components/SiteBlocks";
+import { clinic } from "@/lib/clinic-data";
 
 export default function NotFound() {
-  return <PublicLayout><PageMeta title="Page Not Found" description="The page you requested could not be found." /><section className="section-padding"><div className="page-container text-center"><span className="font-display text-8xl font-extrabold text-secondary">404</span><h1 className="mt-6 font-display text-4xl font-bold">This page has wandered off.</h1><p className="mx-auto mt-4 max-w-lg text-muted-foreground">The link may be outdated, but your next step is easy. Explore our treatments or request an appointment.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><Button asChild className="rounded-full bg-primary"><Link to="/"><Home className="mr-2 size-4" /> Back home</Link></Button><Button asChild variant="outline" className="rounded-full"><Link to="/appointment">Book an appointment <ArrowRight className="ml-2 size-4" /></Link></Button></div></div></section></PublicLayout>;
+  return (
+    <PublicLayout>
+      <PageMeta
+        title="Page not found"
+        description="The page you requested could not be found at Dental Cure Clinic in Noida."
+      />
+
+      <PageHero
+        eyebrow="404"
+        title="That page is not available"
+        description="The link may be broken or out of date. You can call the clinic directly or choose one of the main pages."
+        actions={
+          <>
+            <a href={clinic.phoneHref} className="action-primary">
+              <Phone className="size-4" /> Call the clinic
+            </a>
+            <a href="/" className="action-secondary">
+              Return to homepage
+              <ArrowRight className="size-4" />
+            </a>
+          </>
+        }
+      />
+
+      <section className="page-section bg-brand-ivory">
+        <div className="page-shell">
+          <div className="grid gap-4 sm:grid-cols-3">
+            <a href="/services" className="surface-card surface-card-hover p-6">
+              <h2 className="font-display text-2xl font-semibold text-brand-ink">Treatments</h2>
+              <p className="body-text mt-2">Implants, root canals, crowns, aligners and exams.</p>
+            </a>
+            <a href="/appointment" className="surface-card surface-card-hover p-6">
+              <h2 className="font-display text-2xl font-semibold text-brand-ink">Appointment</h2>
+              <p className="body-text mt-2">Request a date, time and treatment with the clinic.</p>
+            </a>
+            <a href="/contact" className="surface-card surface-card-hover p-6">
+              <h2 className="font-display text-2xl font-semibold text-brand-ink">Contact</h2>
+              <p className="body-text mt-2">Phone, email, WhatsApp and both clinic addresses.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </PublicLayout>
+  );
 }
