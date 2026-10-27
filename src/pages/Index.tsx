@@ -81,8 +81,24 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="section-padding bg-[#fff4dd]">
-        <div className="page-container"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">Good to know</p><h2 className="section-title mx-auto">Questions, answered simply.</h2></div><div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">{faqs.slice(0, 4).map((faq) => <details key={faq.question} className="surface-card group p-6"><summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-display font-bold marker:hidden">{faq.question}<span className="grid size-7 shrink-0 place-items-center rounded-full bg-secondary text-lg leading-none text-primary transition group-open:rotate-45">+</span></summary><p className="mt-4 text-sm leading-6 text-muted-foreground">{faq.answer}</p></details>)}</div></div>
+      <section className="section-padding relative isolate overflow-hidden bg-[#fff4dd]">
+        <div className="page-container flex flex-col items-center">
+          <div data-reveal="fade" className="w-full max-w-3xl text-center">
+            <p className="eyebrow">Good to know</p>
+            <h2 data-reveal="fade" className="section-title mx-auto">Questions, answered simply.</h2>
+          </div>
+          <div className="mt-10 grid w-full max-w-4xl grid-cols-1 items-start gap-4 md:grid-cols-2">
+            {faqs.slice(0, 4).map((faq) => (
+              <details key={faq.question} data-reveal="fade" className="surface-card group relative h-fit min-w-0 overflow-hidden p-6">
+                <summary className="flex min-h-7 cursor-pointer list-none items-start justify-between gap-4 font-display font-bold marker:hidden">
+                  <span className="min-w-0 flex-1">{faq.question}</span>
+                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-secondary text-lg leading-none text-primary transition group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-4 max-w-[52ch] text-pretty text-sm leading-6 text-muted-foreground">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="px-5 pb-20 sm:px-6 lg:pb-28">
