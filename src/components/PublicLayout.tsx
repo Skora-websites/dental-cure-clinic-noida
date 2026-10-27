@@ -30,7 +30,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   return (
     <PageMotion>
       <div className="bg-[#123f3a] px-3 py-2.5 text-center text-[11px] font-medium leading-4 text-white/90 sm:text-xs">
-        <span className="inline-flex items-center justify-center gap-2"><Clock3 className="size-3.5 shrink-0" /> <span>Open today until 8:00 PM · Same-week requests available</span></span>
+        <span className="inline-flex items-center justify-center gap-2"><Clock3 className="size-3.5 shrink-0" /> <span>Call for current availability and appointment times</span></span>
       </div>
       <header className="sticky top-0 z-50 border-b border-white/60 bg-[#fffdf8]/75 shadow-[0_8px_30px_-22px_rgba(15,118,110,0.5)] backdrop-blur-2xl backdrop-saturate-150">
         <div className="page-container flex h-[72px] items-center justify-between gap-3 sm:h-[76px]">
@@ -65,7 +65,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           <div>
             <BrandLogo light />
             <p className="mt-5 max-w-xs text-sm leading-6 text-white/65">A calm, modern dental clinic focused on comfortable care and long-term oral health.</p>
-            <p className="mt-5 inline-flex rounded-full border border-white/15 px-3 py-1 text-[11px] font-semibold text-white/65">Demo clinic details · ready to replace</p>
+            <p className="mt-5 inline-flex rounded-full border border-white/15 px-3 py-1 text-[11px] font-semibold text-white/65">Content updated from dentalcureclinics.com</p>
           </div>
           <div>
             <h3 className="font-display text-lg font-bold">Explore</h3>
@@ -85,7 +85,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             <div className="mt-5 space-y-3 text-sm">
               <a href={clinic.phoneHref} className="flex items-center gap-3 text-white/70 hover:text-white"><Phone className="size-4 text-[#5eead4]" /> {clinic.phone}</a>
               <a href={`mailto:${clinic.email}`} className="flex min-w-0 items-center gap-3 text-white/70 hover:text-white"><Mail className="size-4 shrink-0 text-[#5eead4]" /> <span className="break-all">{clinic.email}</span></a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/70 hover:text-white"><Instagram className="size-4 text-[#5eead4]" /> Instagram</a>
+              <a href="https://dentalcureclinics.com/contact-us/" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/70 hover:text-white"><Instagram className="size-4 text-[#5eead4]" /> Social links</a>
             </div>
             <Button asChild variant="outline" className="mt-6 rounded-full border-white/25 bg-transparent text-white hover:bg-white hover:text-[#123f3a]"><Link to="/contact">Contact the clinic <ArrowRight className="ml-2 size-4" /></Link></Button>
           </div>
