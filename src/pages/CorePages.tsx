@@ -12,7 +12,7 @@ export function PageIntro({ eyebrow, title, copy, image }: { eyebrow: string; ti
     <section className="relative overflow-hidden bg-[#123f3a] py-16 sm:py-20 lg:py-24">
       {image && <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-20" />}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0c3531] via-[#0c3531]/90 to-[#0c3531]/50" />
-      <div className="page-container relative"><Badge className="max-w-full rounded-full border border-white/20 bg-white/10 text-white hover:bg-white/10">{eyebrow}</Badge><h1 className="mt-5 max-w-3xl break-words font-display text-[2.25rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-6xl">{title}</h1><p className="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">{copy}</p></div>
+      <div className="page-container relative"><Badge data-reveal="scale" className="glass-panel max-w-full rounded-full text-white hover:bg-white/15">{eyebrow}</Badge><h1 data-reveal="up" className="mt-5 max-w-3xl break-words font-display text-[2.25rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-6xl">{title}</h1><p data-reveal="up" className="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">{copy}</p></div>
     </section>
   );
 }

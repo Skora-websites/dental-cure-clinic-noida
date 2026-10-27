@@ -20,14 +20,14 @@ export default function Index() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0c3531]/95 via-[#0c3531]/75 to-[#0c3531]/15" />
         <div className="page-container relative flex min-h-[640px] items-center py-16 sm:min-h-[680px] sm:py-20">
           <div className="max-w-2xl text-white">
-            <Badge className="mb-6 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white hover:bg-white/10">Calm, modern dentistry in Koramangala</Badge>
-            <h1 className="max-w-xl break-words font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Feel good about your smile.</h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-white/75 sm:text-xl">Comfort-led dental care, clear guidance and a team that takes the time to listen. Request your visit in just a few minutes.</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Badge data-hero className="glass-panel mb-6 rounded-full px-4 py-2 text-white hover:bg-white/15">Calm, modern dentistry in Koramangala</Badge>
+            <h1 data-hero className="max-w-xl break-words font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Feel good about your smile.</h1>
+            <p data-hero className="mt-7 max-w-xl text-lg leading-8 text-white/75 sm:text-xl">Comfort-led dental care, clear guidance and a team that takes the time to listen. Request your visit in just a few minutes.</p>
+            <div data-hero className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg" className="w-full rounded-full bg-[#5eead4] px-7 text-[#123f3a] hover:bg-[#99f6e4] sm:w-auto"><Link to="/appointment">Request an appointment <ArrowRight className="ml-2 size-4" /></Link></Button>
               <Button asChild size="lg" variant="outline" className="w-full rounded-full border-white/35 bg-white/5 px-7 text-white hover:bg-white hover:text-[#123f3a] sm:w-auto"><a href="tel:+919876543210"><Phone className="mr-2 size-4" /> Call the clinic</a></Button>
             </div>
-            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/70">
+            <div data-hero className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/70">
               {["No rush appointments", "Private consultation rooms", "English & Hindi support"].map((item) => <span key={item} className="inline-flex items-center gap-2"><Check className="size-4 text-[#5eead4]" /> {item}</span>)}
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function Index() {
             <p className="section-copy lg:ml-auto">Good dental care should never feel like a hurdle. We pair thoughtful treatment with a calm environment, honest guidance and enough time for your questions.</p>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {benefits.map(({ icon: Icon, title, copy }) => <div key={title} className="surface-card p-7 transition-transform hover:-translate-y-1"><span className="grid size-12 place-items-center rounded-2xl bg-secondary text-primary"><Icon className="size-5" /></span><h3 className="mt-6 font-display text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{copy}</p></div>)}
+            {benefits.map(({ icon: Icon, title, copy }) => <div key={title} className="glass-panel-light p-7 transition-transform hover:-translate-y-1"><span className="grid size-12 place-items-center rounded-2xl bg-secondary text-primary"><Icon className="size-5" /></span><h3 className="mt-6 font-display text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{copy}</p></div>)}
           </div>
         </div>
       </section>
@@ -70,7 +70,7 @@ export default function Index() {
 
       <section className="section-padding bg-[#123f3a] text-white">
         <div className="page-container">
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5eead4]">Patient experiences</p><h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">Kind words from our patients.</h2><p className="mt-5 text-sm leading-6 text-white/60">Placeholder testimonials for layout review. Replace only with clinic-approved, properly consented patient feedback.</p></div><div className="grid gap-4 md:grid-cols-3">{testimonials.map((item) => <figure key={item.name} className="rounded-3xl border border-white/10 bg-white/[0.06] p-6"><div className="flex gap-1 text-[#5eead4]">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="size-3.5 fill-current" />)}</div><blockquote className="mt-5 text-sm leading-6 text-white/80">“{item.quote}”</blockquote><figcaption className="mt-6 text-xs font-semibold text-white">{item.name}<span className="mt-1 block font-normal text-white/45">{item.detail}</span></figcaption></figure>)}</div></div>
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5eead4]">Patient experiences</p><h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">Kind words from our patients.</h2><p className="mt-5 text-sm leading-6 text-white/60">Placeholder testimonials for layout review. Replace only with clinic-approved, properly consented patient feedback.</p></div><div className="grid gap-4 md:grid-cols-3">{testimonials.map((item) => <figure key={item.name} className="glass-panel rounded-3xl p-6"><div className="flex gap-1 text-[#5eead4]">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="size-3.5 fill-current" />)}</div><blockquote className="mt-5 text-sm leading-6 text-white/80">“{item.quote}”</blockquote><figcaption className="mt-6 text-xs font-semibold text-white">{item.name}<span className="mt-1 block font-normal text-white/45">{item.detail}</span></figcaption></figure>)}</div></div>
         </div>
       </section>
 
@@ -86,7 +86,7 @@ export default function Index() {
       </section>
 
       <section className="px-5 pb-20 sm:px-6 lg:pb-28">
-        <div className="page-container overflow-hidden rounded-[2rem] bg-primary px-6 py-12 text-white sm:px-12 lg:flex lg:items-center lg:justify-between lg:py-16"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#99f6e4]">Ready when you are</p><h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Let’s take care of your smile.</h2><p className="mt-3 text-white/70">Request your preferred time online. Our team will call to confirm.</p></div><div className="mt-7 flex flex-col gap-3 sm:flex-row lg:mt-0"><Button asChild size="lg" className="rounded-full bg-[#5eead4] text-[#123f3a] hover:bg-[#99f6e4]"><Link to="/appointment"><CalendarCheck2 className="mr-2 size-4" /> Request appointment</Link></Button><Button asChild size="lg" variant="outline" className="rounded-full border-white/30 bg-transparent text-white hover:bg-white hover:text-primary"><a href="https://maps.google.com/?q=Green+Park+Avenue+Koramangala+Bengaluru"><MapPin className="mr-2 size-4" /> Get directions</a></Button></div></div>
+        <div className="page-container overflow-hidden rounded-[2rem] border border-white/20 bg-primary/90 px-6 py-12 text-white shadow-[0_24px_80px_-36px_rgba(0,0,0,0.55)] backdrop-blur-2xl sm:px-12 lg:flex lg:items-center lg:justify-between lg:py-16"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#99f6e4]">Ready when you are</p><h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Let’s take care of your smile.</h2><p className="mt-3 text-white/70">Request your preferred time online. Our team will call to confirm.</p></div><div className="mt-7 flex flex-col gap-3 sm:flex-row lg:mt-0"><Button asChild size="lg" className="rounded-full bg-[#5eead4] text-[#123f3a] hover:bg-[#99f6e4]"><Link to="/appointment"><CalendarCheck2 className="mr-2 size-4" /> Request appointment</Link></Button><Button asChild size="lg" variant="outline" className="rounded-full border-white/30 bg-transparent text-white hover:bg-white hover:text-primary"><a href="https://maps.google.com/?q=Green+Park+Avenue+Koramangala+Bengaluru"><MapPin className="mr-2 size-4" /> Get directions</a></Button></div></div>
       </section>
     </PublicLayout>
   );
