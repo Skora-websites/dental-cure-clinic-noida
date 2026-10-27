@@ -15,17 +15,17 @@ export default function Index() {
   return (
     <PublicLayout>
       <PageMeta title="Gentle Dental Care in Bengaluru" description="Request an appointment with Dental Cure Clinic for comfortable, modern dental care in Koramangala, Bengaluru." />
-      <section className="relative min-h-[680px] overflow-hidden bg-[#123f3a]">
+      <section className="relative min-h-[640px] overflow-hidden bg-[#123f3a] sm:min-h-[680px]">
         <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=2000&q=90" alt="Bright and welcoming Dental Cure Clinic treatment room" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0c3531]/95 via-[#0c3531]/75 to-[#0c3531]/15" />
-        <div className="page-container relative flex min-h-[680px] items-center py-20">
+        <div className="page-container relative flex min-h-[640px] items-center py-16 sm:min-h-[680px] sm:py-20">
           <div className="max-w-2xl text-white">
             <Badge className="mb-6 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white hover:bg-white/10">Calm, modern dentistry in Koramangala</Badge>
-            <h1 className="max-w-xl font-display text-5xl font-extrabold leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Feel good about your smile.</h1>
+            <h1 className="max-w-xl break-words font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Feel good about your smile.</h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-white/75 sm:text-xl">Comfort-led dental care, clear guidance and a team that takes the time to listen. Request your visit in just a few minutes.</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="rounded-full bg-[#5eead4] px-7 text-[#123f3a] hover:bg-[#99f6e4]"><Link to="/appointment">Request an appointment <ArrowRight className="ml-2 size-4" /></Link></Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full border-white/35 bg-white/5 px-7 text-white hover:bg-white hover:text-[#123f3a]"><a href="tel:+919876543210"><Phone className="mr-2 size-4" /> Call the clinic</a></Button>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button asChild size="lg" className="w-full rounded-full bg-[#5eead4] px-7 text-[#123f3a] hover:bg-[#99f6e4] sm:w-auto"><Link to="/appointment">Request an appointment <ArrowRight className="ml-2 size-4" /></Link></Button>
+              <Button asChild size="lg" variant="outline" className="w-full rounded-full border-white/35 bg-white/5 px-7 text-white hover:bg-white hover:text-[#123f3a] sm:w-auto"><a href="tel:+919876543210"><Phone className="mr-2 size-4" /> Call the clinic</a></Button>
             </div>
             <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/70">
               {["No rush appointments", "Private consultation rooms", "English & Hindi support"].map((item) => <span key={item} className="inline-flex items-center gap-2"><Check className="size-4 text-[#5eead4]" /> {item}</span>)}
@@ -63,7 +63,7 @@ export default function Index() {
 
       <section className="section-padding overflow-hidden bg-white">
         <div className="page-container grid gap-16 lg:grid-cols-2 lg:items-center">
-          <div className="relative"><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=85" alt="A calm and modern dental treatment room" className="aspect-[4/3] w-full object-cover" /></div><div className="surface-card absolute -bottom-6 -right-3 max-w-[260px] p-5 sm:-right-6"><div className="flex gap-1 text-amber-500">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="size-4 fill-current" />)}</div><p className="mt-3 text-sm font-semibold leading-6">“Every detail is designed to help you feel at ease.”</p><p className="mt-2 text-xs text-muted-foreground">Dental Cure team</p></div></div>
+          <div className="relative mb-8 sm:mb-0"><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=85" alt="A calm and modern dental treatment room" className="aspect-[4/3] w-full object-cover" /></div><div className="surface-card absolute -bottom-6 left-4 right-4 max-w-[280px] p-5 sm:-right-6 sm:left-auto"><div className="flex gap-1 text-amber-500">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="size-4 fill-current" />)}</div><p className="mt-3 text-sm font-semibold leading-6">“Every detail is designed to help you feel at ease.”</p><p className="mt-2 text-xs text-muted-foreground">Dental Cure team</p></div></div>
           <div><p className="eyebrow">Meet your care team</p><h2 className="section-title">Experienced hands. Human care.</h2><p className="section-copy">Our dentists bring specialist training and a shared belief: good care starts with listening. You will always know what is happening, what it will cost and what comes next.</p><div className="mt-8 space-y-4">{["Clear, personalised treatment plans", "Strict sterilisation protocols", "A private, welcoming environment"].map((item) => <div key={item} className="flex items-center gap-3 text-sm font-semibold"><span className="grid size-7 place-items-center rounded-full bg-secondary text-primary"><Check className="size-4" /></span>{item}</div>)}</div><Button asChild className="mt-9 rounded-full bg-primary"><Link to="/dentists">Meet our dentists <ArrowRight className="ml-2 size-4" /></Link></Button></div>
         </div>
       </section>
@@ -76,7 +76,7 @@ export default function Index() {
 
       <section className="section-padding bg-white">
         <div className="page-container grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="grid grid-cols-2 gap-3">{galleryImages.slice(0, 4).map((image, i) => <img key={image} src={image} alt={i === 0 ? "Modern Dental Cure treatment room" : "Dental clinic interior detail"} className={`h-56 w-full rounded-3xl object-cover ${i % 3 === 0 ? "translate-y-4" : ""}`} />)}</div>
+          <div className="grid grid-cols-2 gap-3 sm:h-80 sm:gap-4">{galleryImages.slice(0, 4).map((image, i) => <img key={image} src={image} alt={i === 0 ? "Modern Dental Cure treatment room" : "Dental clinic interior detail"} className={`h-44 w-full rounded-3xl object-cover sm:h-full ${i % 3 === 0 ? "sm:translate-y-4" : ""}`} />)}</div>
           <div><p className="eyebrow">A space designed for calm</p><h2 className="section-title">A clinic that feels different from the first step.</h2><p className="section-copy">Natural light, warm materials and thoughtfully organised treatment spaces help every visit feel easy. Take a look around before you visit.</p><Button asChild variant="outline" className="mt-8 rounded-full border-primary/25"><Link to="/gallery">View the gallery <ArrowRight className="ml-2 size-4" /></Link></Button></div>
         </div>
       </section>
