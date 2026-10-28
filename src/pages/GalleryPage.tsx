@@ -1,53 +1,68 @@
-import { ArrowRight, Camera } from "lucide-react";
+import { Camera } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { ActionLink, PageHero, SectionHeading } from "@/components/SiteBlocks";
-import { clinic, galleryImages } from "@/lib/clinic-data";
+import { ActionLink, CtaBand, PageHero, SectionIntro } from "@/components/SiteBlocks";
+import { clinic, clinicPhotos } from "@/lib/clinic-data";
 
 export default function GalleryPage() {
   return (
     <PublicLayout>
       <PageMeta
         title="Clinic Gallery"
-        description="Images of Dental Cure Clinic in Noida, including treatment areas, equipment and the clinical environment published on dentalcureclinics.com."
+        description="Images of Dental Cure Clinic in Noida, including treatment illustrations, equipment and the clinical team published on dentalcureclinics.com."
       />
 
       <PageHero
         eyebrow="Gallery"
-        title="Clinic environment"
-        description="These images are taken from the clinic's published material. They show the environment where examination, digital imaging and treatment are carried out."
+        title="Inside the clinic"
+        description="These images are taken from the clinic's own published material. They show the treatments the clinic provides and the dentists who provide them."
+        image={clinicPhotos[0]}
         actions={
           <>
             <a href={clinic.phoneHref} className="action-primary">
               Call to book a visit
             </a>
             <ActionLink to="/appointment" variant="secondary">
-              Book appointment
-              <ArrowRight className="size-4" />
+              Make Appointment
             </ActionLink>
           </>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
+      <section className="band">
         <div className="page-shell">
-          <SectionHeading
-            eyebrow="Clinic photographs"
-            title="Treatment rooms and equipment"
-            description="Equipment varies by treatment. Bring previous records to your appointment so the dentist can select the right imaging and tools."
+          <SectionIntro
+            eyebrow="Published images"
+            title="Treatment images and the clinic team"
+            description="Treatment illustrations show how a procedure works; they are not photographs of patient results. Equipment varies by treatment, so bring previous records to your appointment."
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryImages.map((image, index) => (
-              <figure key={image} className="surface-card surface-card-hover overflow-hidden">
-                <img src={image} alt={`Dental Cure Clinic photograph ${index + 1}`} className="aspect-[4/3] size-full object-cover" loading="lazy" />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {clinicPhotos.map((image, index) => (
+              <figure key={image} className="overflow-hidden rounded-panel">
+                <img
+                  src={image}
+                  alt={`Dental Cure Clinic published image ${index + 1}`}
+                  className="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                  width={420}
+                  height={315}
+                />
               </figure>
             ))}
           </div>
-          <p className="body-text mt-8 flex items-start gap-3">
-            <Camera className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-            Gallery images are sourced from the clinic's public website. Do not use them as evidence of treatment results.
+          <p className="body-text mt-10 flex max-w-[70ch] items-start gap-3">
+            <Camera className="mt-1 size-4 shrink-0 text-teal" aria-hidden="true" />
+            Dental Cure Clinic publishes treatment illustrations and photographs of its dentists rather than a
+            photographic tour of the rooms. Call the clinic if you would like to know what a specific appointment
+            involves.
           </p>
         </div>
       </section>
+
+      <CtaBand
+        eyebrow="Visit the clinic"
+        title="See the clinic on the day of your visit"
+        text="Reception can explain what happens at your first appointment, what to bring, and how long to allow."
+      />
     </PublicLayout>
   );
 }

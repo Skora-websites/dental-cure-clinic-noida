@@ -1,14 +1,8 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowRight, CalendarDays, Clock3, Folder, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { PageHero, SectionHeading } from "@/components/SiteBlocks";
+import { BlogCard, PageHero, SectionIntro } from "@/components/SiteBlocks";
 import { clinic, posts, services } from "@/lib/clinic-data";
-
-const imageBySlug: Record<string, string | undefined> = {
-  "choosing-a-dental-implant": services.find((service) => service.slug === "dental-implants")?.image,
-  "root-canal-treatment-explained": services.find((service) => service.slug === "root-canals")?.image,
-  "choosing-between-braces-and-aligners": services.find((service) => service.slug === "orthodontics")?.image,
-};
 
 export default function BlogDetailPage() {
   const { slug } = useParams();
@@ -21,9 +15,21 @@ export default function BlogDetailPage() {
         <PageHero
           eyebrow="Post not found"
           title="That article is not available"
-          description="The link may be out of date. Read the other dental guides on the blog index."
-          actions={<Link to="/blog" className="action-primary">Back to all posts</Link>}
+          description="The link may be out of date. The other dental guides are on the blog index."
+          actions={
+            <Link to="/blog" className="action-primary">
+              Back to all posts
+            </Link>
+          }
         />
+        <section className="band">
+          <div className="page-shell">
+            <SectionIntro eyebrow="Journal" title="Read the other guides" />
+            <Link to="/blog" className="action-secondary">
+              Open the blog
+            </Link>
+          </div>
+        </section>
       </PublicLayout>
     );
   }
@@ -38,82 +44,61 @@ export default function BlogDetailPage() {
         eyebrow={post.category}
         title={post.title}
         description={post.excerpt}
-        image={imageBySlug[post.slug]}
+        image={post.image}
         highlights={[
-          { value: post.readTime.replace(" read", ""), label: "Minutes to read" },
-          { value: post.date.split(" ")[0], label: "Published day" },
-          { value: "Noida", label: "Clinic location" },
+          { value: post.readTime.replace(" read", " minutes"), label: "Reading time" },
+          { value: post.date, label: "Published" },
+          { value: "Sector 75, Noida", label: "Clinic" },
         ]}
         actions={
           <>
             <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Ask the dentist
+              <Phone className="size-4" aria-hidden="true" /> Ask the dentist
             </a>
             <Link to="/appointment" className="action-secondary">
-              Book an appointment
-              <ArrowRight className="size-4" />
+              Make Appointment
             </Link>
           </>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
-        <div className="page-shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
-          <article className="surface-card p-6 sm:p-10" data-reveal="up">
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5 text-brand-teal">
-                <Folder className="size-3.5" aria-hidden="true" />
-                {post.category}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <CalendarDays className="size-3.5" aria-hidden="true" />
-                {post.date}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Clock3 className="size-3.5" aria-hidden="true" />
-                {post.readTime}
-              </span>
-            </div>
-            <div className="prose-clinic mt-8">
+      <section className="band">
+        <div className="page-shell">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start lg:gap-14">
+            <article className="prose-clinic max-w-[68ch]">
               {post.body.map((paragraph) => (
                 <p key={paragraph.slice(0, 40)} className="mb-5">
                   {paragraph}
                 </p>
               ))}
-            </div>
-          </article>
+            </article>
 
-          <aside className="ink-panel p-6 sm:p-7" data-reveal="up">
-            <p className="section-eyebrow text-brand-mint">Next step</p>
-            <h2 className="font-display text-2xl font-semibold text-white">Bring your X-ray to the appointment</h2>
-            <p className="mt-4 text-sm leading-7 text-white/78">
-              If you already have imaging, bring it with you. The dentist can still take a new digital X-ray if the
-              treatment plan needs a current image.
-            </p>
-            <a href={clinic.phoneHref} className="action-primary mt-6 w-full bg-brand-mint text-brand-deep hover:bg-white">
-              <Phone className="size-4" /> {clinic.phone}
-            </a>
-            <Link to="/contact" className="action-secondary mt-3 w-full border-white/30 bg-white/10 text-white hover:bg-white hover:text-brand-deep">
-              Contact the clinic
-            </Link>
-          </aside>
+            <aside className="ink-panel p-7 lg:sticky lg:top-32">
+              <span className="sub-title">Next step</span>
+              <h2 className="mt-6 text-[1.375rem] leading-tight text-white">Bring your X-ray to the appointment</h2>
+              <p className="mt-3 text-[0.95rem] leading-[1.7] text-light">
+                If you already have imaging, bring it with you. The dentist can still take a new digital X-ray if the
+                treatment plan needs a current image.
+              </p>
+              <div className="mt-7 grid gap-3">
+                <a href={clinic.phoneHref} className="action-primary w-full">
+                  <Phone className="size-4" aria-hidden="true" /> {clinic.phone}
+                </a>
+                <Link to="/contact" className="action-secondary w-full">
+                  Contact the clinic
+                </Link>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 
-      <section className="page-section bg-background">
+      <section className="band band-tuck band-light">
         <div className="page-shell">
-          <SectionHeading eyebrow="Keep reading" title="Related guides" />
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <SectionIntro align="center" eyebrow="Keep reading" title="Related guides" className="mb-[70px]" />
+          <div className="grid gap-6 md:grid-cols-2">
             {related.map((item) => (
-              <article key={item.slug} className="surface-card surface-card-hover p-6 sm:p-7">
-                <p className="section-eyebrow">{item.category}</p>
-                <h3 className="font-display text-2xl font-semibold text-brand-ink">{item.title}</h3>
-                <p className="body-text mt-3">{item.excerpt}</p>
-                <Link to={`/blog/${item.slug}`} className="action-ghost mt-5 px-0">
-                  Read this guide
-                  <ArrowRight className="size-4" />
-                </Link>
-              </article>
+              <BlogCard key={item.slug} post={item} />
             ))}
           </div>
         </div>

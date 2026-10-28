@@ -1,7 +1,14 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Phone } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { PageHero } from "@/components/SiteBlocks";
-import { clinic } from "@/lib/clinic-data";
+import { PageHero, SectionIntro } from "@/components/SiteBlocks";
+import { clinic, clinicPhotos } from "@/lib/clinic-data";
+
+const destinations = [
+  { title: "Treatments", text: "Implants, root canals, crowns, aligners and examinations.", href: "/services" },
+  { title: "Appointment", text: "Request a date, time and treatment with the clinic.", href: "/appointment" },
+  { title: "Contact", text: "Phone, email, WhatsApp and both clinic addresses.", href: "/contact" },
+];
 
 export default function NotFound() {
   return (
@@ -12,37 +19,31 @@ export default function NotFound() {
       />
 
       <PageHero
-        eyebrow="404"
+        eyebrow="Page not found"
         title="That page is not available"
-        description="The link may be broken or out of date. You can call the clinic directly or choose one of the main pages."
+        description="The link may be broken or out of date. Call the clinic directly, or choose one of the main pages below."
+        image={clinicPhotos[0]}
         actions={
-          <>
-            <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Call the clinic
-            </a>
-            <a href="/" className="action-secondary">
-              Return to homepage
-              <ArrowRight className="size-4" />
-            </a>
-          </>
+          <a href={clinic.phoneHref} className="action-primary">
+            <Phone className="size-4" aria-hidden="true" /> Call the clinic
+          </a>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
+      <section className="band">
         <div className="page-shell">
-          <div className="grid gap-4 sm:grid-cols-3">
-            <a href="/services" className="surface-card surface-card-hover p-6">
-              <h2 className="font-display text-2xl font-semibold text-brand-ink">Treatments</h2>
-              <p className="body-text mt-2">Implants, root canals, crowns, aligners and exams.</p>
-            </a>
-            <a href="/appointment" className="surface-card surface-card-hover p-6">
-              <h2 className="font-display text-2xl font-semibold text-brand-ink">Appointment</h2>
-              <p className="body-text mt-2">Request a date, time and treatment with the clinic.</p>
-            </a>
-            <a href="/contact" className="surface-card surface-card-hover p-6">
-              <h2 className="font-display text-2xl font-semibold text-brand-ink">Contact</h2>
-              <p className="body-text mt-2">Phone, email, WhatsApp and both clinic addresses.</p>
-            </a>
+          <SectionIntro eyebrow="Where to go next" title="Main pages" />
+          <div className="grid gap-6 md:grid-cols-3">
+            {destinations.map((destination) => (
+              <Link
+                key={destination.href}
+                to={destination.href}
+                className="surface-card surface-hover flex h-full flex-col p-7"
+              >
+                <h2 className="text-[1.5rem] leading-tight">{destination.title}</h2>
+                <p className="body-text mt-3">{destination.text}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

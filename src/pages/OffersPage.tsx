@@ -1,7 +1,7 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { ActionLink, PageHero, SectionHeading } from "@/components/SiteBlocks";
-import { clinic, offers } from "@/lib/clinic-data";
+import { ActionLink, CtaBand, PageHero, SectionIntro } from "@/components/SiteBlocks";
+import { clinic, clinicPhotos, offers } from "@/lib/clinic-data";
 
 export default function OffersPage() {
   return (
@@ -14,35 +14,47 @@ export default function OffersPage() {
       <PageHero
         eyebrow="Consultations"
         title="Start with an examination"
-        description="There is no permanent discount shown on this page. The clinic lists its consultation and examination services so you know what the first appointment covers."
+        description="The clinic does not run a permanent discount. It lists its consultation and examination services so you know what the first appointment covers before you book."
+        image={clinicPhotos[4]}
         actions={
           <>
             <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Call {clinic.phone}
+              <Phone className="size-4" aria-hidden="true" /> Call {clinic.phone}
             </a>
             <ActionLink to="/appointment" variant="secondary">
-              Request an appointment
-              <ArrowRight className="size-4" />
+              Make Appointment
             </ActionLink>
           </>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
+      <section className="band">
         <div className="page-shell">
-          <SectionHeading eyebrow="Clinic services" title="Consultation options" description="Treatment suitability and final pricing are confirmed after examination." />
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <SectionIntro
+            eyebrow="Clinic services"
+            title="Consultation options"
+            description="Treatment suitability and final pricing are confirmed after examination."
+          />
+          <div className="grid gap-6 md:grid-cols-2">
             {offers.map((offer) => (
-              <article key={offer.title} className="surface-card surface-card-hover h-full p-7">
-                <span className="meta-pill">{offer.badge}</span>
-                <h2 className="mt-5 font-display text-2xl font-semibold text-brand-ink">{offer.title}</h2>
-                <p className="body-text mt-3">{offer.description}</p>
-                <p className="mt-5 text-sm font-semibold text-muted-foreground">{offer.terms}</p>
+              <article key={offer.title} className="surface-card flex h-full flex-col p-7 sm:p-9">
+                <span className="meta-pill self-start">{offer.badge}</span>
+                <h2 className="mt-6 text-[1.75rem] leading-tight">{offer.title}</h2>
+                <p className="body-text mt-4">{offer.description}</p>
+                <p className="mt-auto border-t border-hairline pt-6 text-[0.92rem] leading-[1.7] text-body">
+                  {offer.terms}
+                </p>
               </article>
             ))}
           </div>
         </div>
       </section>
+
+      <CtaBand
+        eyebrow="Book the first visit"
+        title="An examination is the only way to plan treatment"
+        text="Call the clinic to arrange an examination and, where it is needed, a digital X-ray. Nothing is decided before the dentist has seen your teeth."
+      />
     </PublicLayout>
   );
 }

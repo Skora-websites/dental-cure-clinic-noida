@@ -1,7 +1,7 @@
 import { Phone, ShieldCheck } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { FaqList, PageHero, SectionHeading } from "@/components/SiteBlocks";
-import { clinic, faqs } from "@/lib/clinic-data";
+import { FaqList, PageHero, SectionIntro } from "@/components/SiteBlocks";
+import { clinic, clinicPhotos, faqs } from "@/lib/clinic-data";
 
 export default function FaqPage() {
   return (
@@ -12,49 +12,56 @@ export default function FaqPage() {
       />
 
       <PageHero
-        eyebrow="FAQs"
-        title="Frequently asked questions"
+        eyebrow="Common questions"
+        title="Questions patients ask before treatment"
         description="These answers describe the clinic process. They do not replace a clinical examination, imaging or advice from a dentist."
+        image={clinicPhotos[1]}
         actions={
-          <>
-            <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Call the clinic
-            </a>
-          </>
+          <a href={clinic.phoneHref} className="action-primary">
+            <Phone className="size-4" aria-hidden="true" /> Call the clinic
+          </a>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
-        <div className="page-shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
-          <div>
-            <SectionHeading eyebrow="Questions" title="Dental treatment questions" description="Ask reception if your question is not covered here." />
-            <div className="mt-10">
+      <section className="band">
+        <div className="page-shell">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
+            <div>
+              <SectionIntro eyebrow="Questions" title="Dental treatment questions" />
               <FaqList faqs={faqs} />
             </div>
-          </div>
 
-          <aside className="surface-card grid gap-5 lg:sticky lg:top-24" data-reveal="up">
-            <div>
-              <p className="section-eyebrow">Clinical disclaimer</p>
-              <p className="body-text mt-3">
-                Dental treatment options depend on your own teeth, gums, bone and medical history. Treatment costs and
-                timings are confirmed after examination.
-              </p>
-            </div>
-            <div className="ink-panel p-6">
-              <span className="grid size-11 place-items-center rounded-2xl border border-white/25 bg-white/10 text-brand-mint">
-                <ShieldCheck className="size-5" aria-hidden="true" />
-              </span>
-              <h2 className="mt-5 font-display text-xl font-semibold text-white">Need to talk to a dentist</h2>
-              <p className="mt-3 text-sm leading-7 text-white/78">
-                Call and describe the problem. The clinic can tell you whether you need an urgent visit, an X-ray or a
-                scheduled treatment appointment.
-              </p>
-              <a href={clinic.phoneHref} className="action-primary mt-5 w-full bg-brand-mint text-brand-deep hover:bg-white">
-                {clinic.phone}
-              </a>
-            </div>
-          </aside>
+            <aside className="grid gap-10 lg:sticky lg:top-32">
+              <figure className="overflow-hidden rounded-panel">
+                <img
+                  src={clinicPhotos[3]}
+                  alt="Dentist at Dental Cure Clinic"
+                  className="aspect-[4/3] w-full object-cover object-top"
+                  loading="lazy"
+                  width={520}
+                  height={390}
+                />
+              </figure>
+              <div>
+                <span className="sub-title">Clinical disclaimer</span>
+                <p className="body-text mt-6">
+                  Treatment options depend on your own teeth, gums, bone and medical history. Treatment costs and timings
+                  are confirmed after examination.
+                </p>
+              </div>
+              <div className="ink-panel p-7">
+                <ShieldCheck className="size-6 text-teal" aria-hidden="true" />
+                <h2 className="mt-6 text-[1.375rem] leading-tight text-white">Need to talk to a dentist?</h2>
+                <p className="mt-3 text-[0.95rem] leading-[1.7] text-light">
+                  Call and describe the problem. The clinic can tell you whether you need an urgent visit, an X-ray or a
+                  scheduled treatment appointment.
+                </p>
+                <a href={clinic.phoneHref} className="action-primary mt-6 w-full">
+                  <Phone className="size-4" aria-hidden="true" /> {clinic.phone}
+                </a>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
     </PublicLayout>

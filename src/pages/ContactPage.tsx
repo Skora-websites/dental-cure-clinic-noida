@@ -1,8 +1,9 @@
+import type { LucideIcon } from "lucide-react";
 import { Clock3, Mail, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { PageHero, SectionHeading } from "@/components/SiteBlocks";
+import { PageHero, SectionIntro } from "@/components/SiteBlocks";
 import EnquiryForm from "@/components/EnquiryForm";
-import { clinic } from "@/lib/clinic-data";
+import { clinic, clinicPhotos } from "@/lib/clinic-data";
 
 const locations = [
   {
@@ -19,6 +20,14 @@ const locations = [
   },
 ];
 
+const receptionRows: { icon: LucideIcon; value: string; href?: string }[] = [
+  { icon: Phone, value: clinic.phone, href: clinic.phoneHref },
+  { icon: Phone, value: clinic.secondaryPhone, href: clinic.secondaryPhoneHref },
+  { icon: Mail, value: clinic.email, href: `mailto:${clinic.email}` },
+  { icon: Mail, value: clinic.secondaryEmail, href: `mailto:${clinic.secondaryEmail}` },
+  { icon: Clock3, value: "Call to confirm current hours" },
+];
+
 export default function ContactPage() {
   return (
     <PublicLayout>
@@ -30,74 +39,88 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Get in touch with the clinic"
-        description="Call for appointment availability, email for documents, or send an enquiry below. Both clinic addresses are in Noida and listed on the clinic site."
+        description="Call for appointment availability, email for documents, or send an enquiry below. Both clinic addresses are in Noida."
+        image={clinicPhotos[2]}
         actions={
           <>
             <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Call {clinic.phone}
+              <Phone className="size-4" aria-hidden="true" /> Call {clinic.phone}
             </a>
             <a href={clinic.secondaryPhoneHref} className="action-secondary">
-              <Phone className="size-4" /> Call {clinic.secondaryPhone}
+              <Phone className="size-4" aria-hidden="true" /> {clinic.secondaryPhone}
             </a>
           </>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
-        <div className="page-shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-start">
-          <div className="grid gap-5" data-reveal="up">
-            <SectionHeading eyebrow="Clinic locations" title="Where to find us" description="Two Noida addresses are published by the clinic. Call before travelling to confirm current access." />
-            {locations.map((location) => (
-              <article key={location.title} className="surface-card p-6">
-                <h3 className="font-display text-2xl font-semibold text-brand-ink">{location.title}</h3>
-                <p className="body-text mt-3 flex items-start gap-3">
-                  <MapPin className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                  {location.address}
-                </p>
-                <p className="mt-3 text-sm font-semibold text-muted-foreground">{location.note}</p>
-                <a href={location.maps} target="_blank" rel="noreferrer" className="action-secondary mt-5">
-                  <Navigation className="size-4" /> Open directions
-                </a>
-              </article>
-            ))}
-          </div>
-
-          <div className="grid gap-5" data-reveal="up">
-            <div className="surface-card p-6">
-              <SectionHeading eyebrow="Reception" title="Phone, email and messaging" />
-              <div className="mt-6 grid gap-3 text-sm">
-                <p className="flex items-start gap-3 text-brand-deep">
-                  <Phone className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                  <a href={clinic.phoneHref} className="hover:text-brand-teal">{clinic.phone}</a>
-                </p>
-                <p className="flex items-start gap-3 text-brand-deep">
-                  <Phone className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                  <a href={clinic.secondaryPhoneHref} className="hover:text-brand-teal">{clinic.secondaryPhone}</a>
-                </p>
-                <p className="flex items-start gap-3 text-muted-foreground">
-                  <Mail className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                  <a href={`mailto:${clinic.email}`} className="break-all hover:text-brand-teal">{clinic.email}</a>
-                </p>
-                <p className="flex items-start gap-3 text-muted-foreground">
-                  <Mail className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                  <a href={`mailto:${clinic.secondaryEmail}`} className="break-all hover:text-brand-teal">{clinic.secondaryEmail}</a>
-                </p>
-                <p className="flex items-start gap-3 text-muted-foreground">
-                  <Clock3 className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                  Call to confirm current hours
-                </p>
+      <section className="band">
+        <div className="page-shell">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-start lg:gap-14">
+            <div>
+              <SectionIntro
+                eyebrow="Where to find us"
+                title="Two clinics in Noida"
+                description="Call before travelling to confirm current access and availability."
+              />
+              <div className="grid gap-6 sm:grid-cols-2">
+                {locations.map((location) => (
+                  <article key={location.title} className="surface-card flex h-full flex-col p-7">
+                    <h3 className="text-[1.375rem] leading-tight">{location.title}</h3>
+                    <p className="mt-4 flex items-start gap-3 text-[0.98rem] leading-[1.6] text-body">
+                      <MapPin className="mt-1 size-4 shrink-0 text-teal" aria-hidden="true" />
+                      {location.address}
+                    </p>
+                    <p className="mt-2 text-[0.92rem] text-body">{location.note}</p>
+                    <a
+                      href={location.maps}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="action-secondary mt-auto !min-h-[50px] self-start text-[0.92rem]"
+                    >
+                      <Navigation className="size-4" aria-hidden="true" /> Get directions
+                    </a>
+                  </article>
+                ))}
               </div>
-              <a
-                href={`https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent("Hello, I would like to contact Dental Cure Clinic.")}`}
-                className="action-primary mt-6 w-full"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <MessageCircle className="size-4" /> Start a WhatsApp chat
-              </a>
+
+              <div className="mt-12">
+                <span className="sub-title">Reception</span>
+                <div className="mt-7">
+                  {receptionRows.map((row) => (
+                    <div key={row.value} className="flex items-center gap-3 border-b border-hairline py-4 first:border-t first:border-t-hairline">
+                      <row.icon className="size-4 shrink-0 text-teal" aria-hidden="true" />
+                      {row.href ? (
+                        <a
+                          href={row.href}
+                          className="inline-flex min-h-11 items-center break-all text-[0.98rem] text-ink transition hover:text-teal"
+                        >
+                          {row.value}
+                        </a>
+                      ) : (
+                        <span className="text-[0.98rem] text-body">{row.value}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href={`https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent("Hello, I would like to contact Dental Cure Clinic.")}`}
+                  className="action-primary mt-8"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MessageCircle className="size-4" aria-hidden="true" /> Start a WhatsApp chat
+                </a>
+              </div>
             </div>
-            <SectionHeading eyebrow="Enquiry" title="Send a question" description="Use this form for treatment questions, documents or general information." />
-            <EnquiryForm />
+
+            <div>
+              <SectionIntro
+                eyebrow="Send a question"
+                title="Write to the clinic"
+                description="Use this form for treatment questions, documents or general information."
+              />
+              <EnquiryForm />
+            </div>
           </div>
         </div>
       </section>

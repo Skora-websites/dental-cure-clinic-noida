@@ -6,8 +6,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Fraunces", "Iowan Old Style", "Georgia", "serif"],
+        /* Body and interface text, the reference template's base face. */
+        sans: ["DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        /* Headings. The reference ships a licensed face; Outfit is the closest
+           free geometric sans in weight and proportions. */
+        display: ["Outfit", "DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -43,24 +46,38 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        brand: {
-          ink: "#0F3A37",
-          deep: "#0C322F",
-          teal: "#0F766E",
-          mint: "#7EE2D3",
-          ivory: "#FBF8F1",
-          cream: "#F5E8D2",
+        /*
+         * Named palette from the reference template. The template's #33A9B1
+         * reaches only 2.8:1 against white, so it stays on decorative rules,
+         * icons and dark grounds; #157A82 (5.1:1) carries all teal text and any
+         * fill that has white type on it.
+         */
+        teal: {
+          DEFAULT: "#157A82",
+          bright: "#33A9B1",
+          deep: "#0F6A71",
         },
+        pine: "#1F3D3F",
+        ink: {
+          DEFAULT: "#050C14",
+          alt: "#121C27",
+        },
+        shade: "#DEE8DE",
+        light: "#E2EDF3",
+        mist: "#F5F7FA",
+        body: "#47697B",
+        mute: "#969EB2",
+        hairline: "#D8DDE1",
       },
       borderRadius: {
-        xl: "calc(var(--radius) + 4px)",
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 6px)",
-        sm: "calc(var(--radius) - 12px)",
+        card: "32px",
+        tile: "16px",
+        panel: "30px",
+        ledge: "65px",
+        pill: "50px",
       },
-      boxShadow: {
-        card: "0 28px 70px -48px rgba(15, 118, 110, 0.45)",
-        lift: "0 34px 90px -58px rgba(15, 63, 60, 0.55)",
+      maxWidth: {
+        shell: "1320px",
       },
     },
   },

@@ -124,6 +124,7 @@ export const offers = [
 export const posts = [
   {
     slug: "choosing-a-dental-implant",
+    image: "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-07T170046.061.jpg",
     title: "How an implant is planned after your X-ray",
     excerpt: "Why bone structure, digital imaging and a personal consultation shape the implant recommendation.",
     date: "25 October 2026",
@@ -138,6 +139,7 @@ export const posts = [
   },
   {
     slug: "root-canal-treatment-explained",
+    image: "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-13T155707.989.jpg",
     title: "What happens during root canal treatment",
     excerpt: "A clear look at the examination, anaesthesia and treatment steps used to save an infected tooth.",
     date: "25 October 2026",
@@ -152,6 +154,7 @@ export const posts = [
   },
   {
     slug: "choosing-between-braces-and-aligners",
+    image: "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-13T161643.003.jpg",
     title: "Braces or clear aligners: which fits your treatment?",
     excerpt: "The main differences in comfort, appearance, care and the type of bite correction each option can address.",
     date: "25 October 2026",
@@ -166,6 +169,10 @@ export const posts = [
   },
 ];
 
+/**
+ * Images published by the clinic. The first entry is a marketing flyer rather
+ * than a photograph, so it is not used in image treatments.
+ */
 export const galleryImages = [
   "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-13T141020.408.jpg",
   "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-11T112110.851.jpg",
@@ -175,4 +182,13 @@ export const galleryImages = [
   "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-13T155707.989.jpg",
   "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-07T165554.017.jpg",
   "https://dentalcureclinics.com/wp-content/uploads/2024/09/Untitled-design-2024-09-13T161643.003.jpg",
+];
+
+/** Photographs only: treatment images first, then the two dentists. */
+export const clinicPhotos = [
+  galleryImages[3],
+  galleryImages[4],
+  galleryImages[5],
+  galleryImages[1],
+  galleryImages[2],
 ];

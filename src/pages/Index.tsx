@@ -1,42 +1,107 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarCheck, FileImage, HeartPulse, Phone, ScanLine, Sparkles } from "lucide-react";
+import { CalendarCheck, Phone, ScanLine, Sparkles, Stethoscope, Smile } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { ActionLink, CtaBand, DoctorCard, FaqList, PageHero, ReviewCard, SectionHeading, ServiceCard } from "@/components/SiteBlocks";
-import { clinic, dentists, faqs, galleryImages, services, testimonials } from "@/lib/clinic-data";
+import { QuickAppointmentForm } from "@/components/AppointmentForm";
+import {
+  ActionLink,
+  BlogCard,
+  ChoiceTabs,
+  CtaBand,
+  DoctorCard,
+  FaqList,
+  PageHero,
+  ProcessSteps,
+  ReviewSlider,
+  SectionIntro,
+  ServiceCard,
+  StatRow,
+  StoryCard,
+  TrustStrip,
+} from "@/components/SiteBlocks";
+import { clinic, clinicPhotos, dentists, faqs, posts, services, testimonials } from "@/lib/clinic-data";
 
-const proofPoints = [
+const stats = [
+  { value: "30+", label: "Years in practice", note: "Led by Dr. Gurpreet Singh, who has treated patients in Noida since the 1990s." },
+  { value: "1,000+", label: "Implants placed", note: "Implant cases planned from a digital X-ray and reviewed before treatment starts." },
+  { value: "2", label: "Clinics in Noida", note: "One practice in Sector 75, and a second clinic at Sector 76, Noida." },
+  { value: "8", label: "Treatments offered", note: "From emergency root canal care to implants, aligners and routine examinations." },
+];
+
+const strengths = [
   {
+    label: "Digital imaging first",
     icon: ScanLine,
-    title: "The X-ray comes first",
-    text: "Implant and root canal plans begin with a digital image, so the dentist can review bone, tooth structure and options before treatment starts.",
+    title: "The X-ray comes before the plan",
+    text: "Implant and root canal decisions depend on what the imaging shows. The clinic takes the digital X-ray it needs, then explains what it means for your options.",
+    image: services[5].image,
+    points: [
+      "Lower radiation than film X-rays",
+      "Images available immediately for discussion",
+      "Treatment ranges explained before you decide",
+      "Previous records reviewed if you bring them",
+    ],
   },
   {
-    icon: HeartPulse,
-    title: "The goal is to save natural teeth",
-    text: "Where an infected or damaged tooth can be treated, the clinic reviews root canal treatment instead of moving straight to removal.",
+    label: "Saving natural teeth",
+    icon: Stethoscope,
+    title: "Restorative care before extraction",
+    text: "Where a damaged or infected tooth can be treated, the clinic reviews root canal treatment and restoration rather than moving straight to removal.",
+    image: services[2].image,
+    points: [
+      "Local anaesthesia for the procedure",
+      "Careful cleaning and sealing of the canal",
+      "Crown and filling options to rebuild the tooth",
+      "Aftercare explained before you leave",
+    ],
   },
   {
+    label: "Implant dentistry",
     icon: Sparkles,
-    title: "Full general dentistry in one place",
-    text: "Implant, root canal, filling, crown, brace, aligner, hygiene and smile treatment care is handled by the same clinic team.",
+    title: "Implants planned around your bone",
+    text: "Dr. Gurpreet Singh leads implant cases. The implant system is chosen for your bone structure rather than applied as a standard option.",
+    image: services[0].image,
+    points: [
+      "Over 1,000 implants completed",
+      "Placed into the bone without loading adjacent teeth",
+      "Crown and bridge options reviewed together",
+      "Reasonable treatment ranges from ₹15,000 to ₹21,000",
+    ],
+  },
+  {
+    label: "Smile and alignment",
+    icon: Smile,
+    title: "Cosmetic treatment shaped to you",
+    text: "Whitening, clear aligners, veneers and bonding are discussed against what you want to change, with the expected timeline set out first.",
+    image: services[3].image,
+    points: [
+      "Professional teeth whitening",
+      "Invisalign clear aligners",
+      "Braces for gaps and bite problems",
+      "Veneers, bonding and smile planning",
+    ],
   },
 ];
 
 const journey = [
   {
-    step: "01",
-    title: "Examination",
-    text: "You speak with the dentist about the problem, the look you want, or the treatment that has already been recommended elsewhere.",
+    title: "Book an Appointment",
+    text: "Call the clinic or send a request. Reception confirms the date, time and treatment with you.",
+    icon: CalendarCheck,
   },
   {
-    step: "02",
-    title: "Digital X-ray",
-    text: "The clinic takes the imaging it needs and shows you what it means for the treatment options.",
+    title: "Examination and X-ray",
+    text: "The dentist examines your teeth and gums and takes the digital imaging the case needs.",
+    icon: ScanLine,
   },
   {
-    step: "03",
     title: "Treatment plan",
-    text: "The dentist explains which treatment is suitable, what it involves and the cost range before you decide.",
+    text: "Which treatment suits you, what it involves and the expected range are explained before you agree.",
+    icon: Stethoscope,
+  },
+  {
+    title: "Treatment and follow-up",
+    text: "Treatment is carried out under local anaesthesia where needed, with a review afterwards.",
+    icon: Smile,
   },
 ];
 
@@ -45,107 +110,247 @@ export default function Index() {
     <PublicLayout>
       <PageMeta
         title="Dental Cure Clinic Noida"
-        description="Dental implants, root canal treatment, fillings, braces, clear aligners and routine exams in Noida. Led by Dr. Gurpreet Singh and Dr. Manpreet Kaur. Call to book an appointment."
+        description="Dental implants, root canal treatment, fillings, braces, clear aligners and routine examinations in Sector 75 and Sector 76, Noida. Led by Dr. Gurpreet Singh and Dr. Manpreet Kaur."
       />
 
       <PageHero
-        eyebrow="Dental clinic in Sector 75, Noida"
-        title="Dental care in Noida that starts with your X-ray"
-        description="Dental Cure Clinic places implants, saves teeth with root canal treatment, restores damaged teeth and aligns smiles. Every plan begins with an examination and the imaging needed to see the real problem."
-        image={services[0].image}
-        highlights={[
-          { value: "1,000+", label: "Implants completed" },
-          { value: "30+", label: "Years of practice" },
-          { value: "2", label: "Clinic locations" },
-        ]}
+        eyebrow="Implantology and general dentistry in Noida"
+        title="Modern dental care for confident smiles."
+        description="Stay ahead with regular checks, early treatment of problems, and careful work on the teeth you already have. Implants, root canal treatment, cosmetic dentistry and routine examinations, all handled by the same clinic team."
+        image={clinicPhotos[0]}
         actions={
           <>
-            <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Call {clinic.phone}
-            </a>
-            <ActionLink to="/appointment" variant="secondary">
-              Book appointment
-              <ArrowRight className="size-4" />
+            <ActionLink to="/appointment" variant="primary">
+              Make Appointment
             </ActionLink>
+            <a href={clinic.phoneHref} className="action-secondary">
+              <Phone className="size-4" aria-hidden="true" /> {clinic.phone}
+            </a>
           </>
         }
       />
 
-      <section className="page-section bg-brand-ivory" data-reveal="fade">
+      {/*
+        The page's one direct ask, on the sage shelf tucked under the banner.
+
+        There is no photograph here: the clinic publishes no reception or room
+        photograph, and both dentist portraits are already on this page further
+        down, so a face reused at this size would be filler. The number is set
+        as display type instead — for most patients calling is the faster way
+        in, and it is the one fact this band can state better than the form.
+
+        Padding is measured against the 100px the band tucks under, so the copy
+        still clears the banner's rounded corners by ~70px.
+      */}
+      <section className="band band-tuck band-shade !pb-[70px] !pt-[150px] lg:!pb-[100px] lg:!pt-[190px]">
         <div className="page-shell">
-          <SectionHeading
-            eyebrow="Why patients come here"
-            title="Treatment based on what the X-ray shows"
-            description="The clinic does not sell a single standard package. It examines, images and then recommends what fits your teeth, bone and budget."
-          />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {proofPoints.map((point) => (
-              <article key={point.title} className="surface-card surface-card-hover h-full p-7">
-                <span className="grid size-12 place-items-center rounded-2xl border border-brand-teal/10 bg-accent text-brand-teal">
-                  <point.icon className="size-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-6 font-display text-2xl font-semibold text-brand-ink">{point.title}</h3>
-                <p className="body-text mt-3">{point.text}</p>
-              </article>
-            ))}
+          {/*
+            Three cells rather than two columns: on a phone the slip comes
+            straight after the lede, and the phone block becomes the fallback
+            below it. On desktop the slip holds the right side across both rows.
+          */}
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,540px)] lg:gap-16 xl:gap-24">
+            <div className="max-w-[54ch]">
+              <span className="sub-title" data-reveal>
+                Request an appointment
+              </span>
+              <h2 className="section-title" data-split>
+                Three details, and reception takes it from there.
+              </h2>
+              <p className="body-text max-w-[46ch]" data-reveal>
+                Your name, your number and the treatment you are asking about. Reception calls back to agree a date and
+                time — nothing is booked until that call.
+              </p>
+            </div>
+
+            <div
+              className="order-2 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start"
+              data-reveal
+            >
+              <QuickAppointmentForm />
+            </div>
+
+            <div className="order-last border-t border-ink/10 pt-8 lg:order-none lg:col-start-1 lg:row-start-2 lg:self-end">
+              <p className="text-[0.95rem] text-body">Prefer to speak to someone?</p>
+              <a
+                href={clinic.phoneHref}
+                className="mt-1 inline-flex min-h-11 items-center font-display text-[clamp(1.6rem,2.6vw,2.25rem)] font-semibold leading-tight text-ink transition hover:text-teal"
+              >
+                {clinic.phone}
+              </a>
+              <p className="mt-3 text-[0.95rem] leading-[1.7] text-body">
+                Monday to Saturday; call ahead to confirm current hours. The Sector 76 clinic is on{" "}
+                <a
+                  href={clinic.secondaryPhoneHref}
+                  className="whitespace-nowrap font-semibold text-ink underline decoration-hairline underline-offset-4 transition hover:text-teal"
+                >
+                  {clinic.secondaryPhone}
+                </a>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="page-section bg-background" data-reveal="fade">
+      <section className="band">
         <div className="page-shell">
-          <SectionHeading
-            eyebrow="How a visit works"
-            title="Three steps, no guesswork"
-            description="You will know what is being treated, why it is being treated that way and what happens next before the treatment begins."
+          <SectionIntro
+            align="center"
+            eyebrow="Special care for your smile"
+            title="Care planned around your teeth, not a standard package."
+            className="mb-[70px]"
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {journey.map((item) => (
-              <article key={item.step} className="soft-panel h-full p-7">
-                <p className="font-display text-4xl font-semibold text-brand-teal/35">{item.step}</p>
-                <h3 className="mt-4 font-display text-2xl font-semibold text-brand-ink">{item.title}</h3>
-                <p className="body-text mt-3">{item.text}</p>
-              </article>
-            ))}
-          </div>
+          <StatRow stats={stats} />
+          <p className="body-text mx-auto mt-16 max-w-[68ch] text-center" data-reveal>
+            Dental Cure Clinic is a general and cosmetic dental practice in Noida. Every treatment begins with an
+            examination and, where the case needs it, a digital X-ray, so the recommendation matches what is actually
+            happening in your mouth rather than a fixed menu.
+          </p>
         </div>
       </section>
 
-      <section className="page-section bg-brand-ivory" data-reveal="fade">
+      <section
+        className="band band-tail band-photo"
+        style={{ backgroundImage: `url(${clinicPhotos[1]})` }}
+        data-parallax
+      >
         <div className="page-shell">
-          <SectionHeading
-            eyebrow="Treatments"
-            title="The full range of care inside the clinic"
-            description="From emergency dental problems to everyday check-ups, these are the treatments currently listed by Dental Cure Clinic."
+          <SectionIntro
+            tone="light"
+            eyebrow="Our services"
+            title="The treatments patients come to us for"
+            description="From emergency dental problems to everyday check-ups, these are the treatments currently offered by the practice."
             action={
               <ActionLink to="/services" variant="secondary">
-                See all services
-                <ArrowRight className="size-4" />
+                All services
               </ActionLink>
             }
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {services.map((service) => (
               <ServiceCard key={service.slug} service={service} />
             ))}
           </div>
+          <div className="mt-[60px] text-center" data-reveal>
+            <h3 className="text-[1.5rem] text-white">Not sure which treatment you need?</h3>
+            <p className="mx-auto mt-3 max-w-[56ch] text-[1rem] leading-[26px] text-light">
+              Describe the problem on the phone and reception will say whether it needs an immediate visit, an X-ray or a
+              scheduled appointment.
+            </p>
+            <a href={clinic.phoneHref} className="action-primary mt-7">
+              Call {clinic.phone}
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="page-section bg-background" data-reveal="fade">
+      {/* Padding is measured against the 100px the band tucks under, so the
+          strip sits centred in the part of it that is actually on screen. */}
+      <section className="band band-tuck band-shade !pb-[60px] !pt-[140px]">
         <div className="page-shell">
-          <SectionHeading
-            eyebrow="Your dentist"
-            title="Two dentists, one consistent treatment plan"
-            description="Dr. Gurpreet Singh leads implant cases. Dr. Manpreet Kaur focuses on careful restorative treatment and follow-up."
-            action={
-              <ActionLink to="/dentists" variant="secondary">
-                Meet the team
-                <ArrowRight className="size-4" />
-              </ActionLink>
-            }
+          <TrustStrip
+            items={[
+              "30+ years in practice",
+              "1,000+ implants",
+              "Digital X-ray on site",
+              "Invisalign clear aligners",
+              "Two clinics in Noida",
+            ]}
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+        </div>
+      </section>
+
+      <section className="band">
+        <div className="page-shell">
+          <SectionIntro
+            align="center"
+            eyebrow="Why choose us"
+            title="Professional, personal dental treatment"
+            className="mb-[70px]"
+          />
+          <ChoiceTabs tabs={strengths} />
+        </div>
+      </section>
+
+      <section
+        className="band band-tail band-photo"
+        style={{ backgroundImage: `url(${clinicPhotos[2]})` }}
+        data-parallax
+      >
+        <div className="page-shell">
+          <SectionIntro
+            tone="light"
+            eyebrow="Treatment in practice"
+            title="What the plan actually looks like"
+            description="Two treatments that most often need a careful conversation before they begin."
+          />
+          <div className="grid gap-6 xl:grid-cols-2">
+            <StoryCard
+              image={services[0].image}
+              eyebrow="Dental implants"
+              title="An implant placed from the imaging, not a template"
+              text="The site is assessed on a digital X-ray before the implant system is chosen, so the plan matches your bone and the surrounding teeth."
+              points={[
+                "Reasonable treatment ranges from ₹15,000 to ₹21,000",
+                "Placed into the bone without using adjacent teeth for support",
+                "Crown options reviewed with the implant",
+              ]}
+              to="/services/dental-implants"
+            />
+            <StoryCard
+              image={services[2].image}
+              eyebrow="Root canal treatment"
+              title="Saving the tooth in the chair"
+              text="Deep decay and trauma are treated by cleaning and sealing the canal, under local anaesthesia, rather than removing the tooth."
+              points={[
+                "Examined with X-rays before treatment",
+                "Local anaesthesia for comfort",
+                "Crown or filling to rebuild the tooth afterwards",
+              ]}
+              to="/services/root-canals"
+            />
+          </div>
+        </div>
+      </section>
+
+      <CtaBand />
+
+      <section className="band">
+        <div className="page-shell">
+          <SectionIntro
+            align="center"
+            eyebrow="How a visit works"
+            title="Four steps, no guesswork"
+            className="mb-[70px]"
+          />
+          <ProcessSteps steps={journey} />
+        </div>
+      </section>
+
+      {/* Tucks under the process band and must sit above the team band, so its
+          rounded corners reveal the photograph behind them. */}
+      <section className="band band-tuck band-dark !z-[3] !pb-[80px] !pt-[110px] lg:!pb-[100px] lg:!pt-[170px]">
+        <div className="page-shell">
+          <ReviewSlider reviews={testimonials} />
+        </div>
+      </section>
+
+      {/* Pine rather than a photograph: the clinic has no wide team shot, and a
+          portrait blown up to full bleed reads as an accident. */}
+      <section
+        className="band band-tuck bg-pine !pt-[140px] lg:!pt-[200px]"
+        id="team"
+      >
+        <div className="page-shell">
+          <SectionIntro
+            align="center"
+            tone="light"
+            eyebrow="Our professional team"
+            title="Two dentists, one treatment plan"
+            className="mb-[70px]"
+          />
+          <div className="mx-auto grid max-w-[980px] gap-6 md:grid-cols-2">
             {dentists.map((doctor) => (
               <DoctorCard key={doctor.slug} doctor={doctor} />
             ))}
@@ -153,84 +358,56 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="page-section bg-brand-ivory" data-reveal="fade">
+      <section className="band">
         <div className="page-shell">
-          <SectionHeading
-            eyebrow="Patient feedback"
-            title="What patients say after treatment"
-            description="Feedback published by Dental Cure Clinic. Names are withheld in the source feedback."
-          />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {testimonials.map((review) => (
-              <ReviewCard key={review.quote} review={review} />
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
+            <div>
+              <SectionIntro eyebrow="Common questions" title="What patients ask before treatment" />
+              <FaqList faqs={faqs} />
+            </div>
+            <aside className="lg:sticky lg:top-32">
+              <figure className="overflow-hidden rounded-panel">
+                <img
+                  src={clinicPhotos[0]}
+                  alt="Dental treatment at Dental Cure Clinic"
+                  className="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                  width={520}
+                  height={390}
+                />
+              </figure>
+              <p className="body-text mt-6">
+                Ask reception if your question is not covered here. The clinic will tell you whether the problem needs
+                an immediate visit or can wait for a scheduled appointment.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href={clinic.phoneHref} className="action-primary !min-h-[50px] text-[0.95rem]">
+                  Call the clinic
+                </a>
+                <Link to="/faqs" className="action-secondary !min-h-[50px] text-[0.95rem]">
+                  All FAQs
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="band band-tail band-light">
+        <div className="page-shell">
+          <SectionIntro align="center" eyebrow="News and blog" title="Insights from our blog." className="mb-[70px]" />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="page-section bg-background" data-reveal="fade">
-        <div className="page-shell">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center">
-            <div>
-              <SectionHeading
-                eyebrow="Inside the clinic"
-                title="A look at the clinic and treatment rooms"
-                description="The practice publishes images of its equipment, operatories and treatment areas on dentalcureclinics.com."
-                action={
-                  <ActionLink to="/gallery" variant="secondary">
-                    Open gallery
-                    <ArrowRight className="size-4" />
-                  </ActionLink>
-                }
-              />
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                <div className="soft-panel flex items-center gap-3 p-4">
-                  <FileImage className="size-5 text-brand-teal" aria-hidden="true" />
-                  <span className="text-sm font-semibold text-brand-deep">Digital X-ray and imaging</span>
-                </div>
-                <div className="soft-panel flex items-center gap-3 p-4">
-                  <CalendarCheck className="size-5 text-brand-teal" aria-hidden="true" />
-                  <span className="text-sm font-semibold text-brand-deep">Appointments by phone or request</span>
-                </div>
-              </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {galleryImages.slice(0, 4).map((image, index) => (
-                <div key={image} className={`surface-card overflow-hidden ${index % 2 === 0 ? "sm:mt-0" : "sm:mt-8"}`}>
-                  <img src={image} alt="Dental Cure Clinic" className="aspect-[4/5] size-full object-cover transition duration-700 hover:scale-[1.04]" loading="lazy" />
-                </div>
-              ))}
-            </div>
+          <div className="mt-12 text-center" data-reveal>
+            <ActionLink to="/blog" variant="dark">
+              Read the journal
+            </ActionLink>
           </div>
         </div>
       </section>
-
-      <section className="page-section bg-brand-ivory" data-reveal="fade">
-        <div className="page-shell grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
-          <div>
-            <SectionHeading eyebrow="Questions" title="What patients ask before treatment" />
-            <div className="mt-10">
-              <FaqList faqs={faqs.slice(0, 4)} />
-            </div>
-          </div>
-          <aside className="ink-panel sticky top-24 p-7">
-            <p className="section-eyebrow text-brand-mint">Talk to the clinic</p>
-            <h2 className="font-display text-2xl font-semibold text-white">Not sure which treatment you need?</h2>
-            <p className="mt-4 text-sm leading-7 text-white/78">
-              Call and describe the problem. The clinic will tell you whether it needs an immediate visit, an X-ray or a
-              scheduled treatment appointment.
-            </p>
-            <a href={clinic.phoneHref} className="action-primary mt-6 w-full bg-brand-mint text-brand-deep hover:bg-white">
-              <Phone className="size-4" /> Call now
-            </a>
-            <Link to="/appointment" className="action-secondary mt-3 w-full border-white/30 bg-white/10 text-white hover:bg-white hover:text-brand-deep">
-              Request an appointment
-            </Link>
-          </aside>
-        </div>
-      </section>
-
-      <CtaBand />
     </PublicLayout>
   );
 }

@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import PublicLayout, { PageMeta } from "@/components/PublicLayout";
-import { ActionLink, PageHero, SectionHeading } from "@/components/SiteBlocks";
+import { ActionLink, PageHero, SectionIntro } from "@/components/SiteBlocks";
 import { clinic, services } from "@/lib/clinic-data";
 
 const treatmentBlurbs: Record<string, { what: string; detail: string }> = {
@@ -54,13 +54,24 @@ export default function ServiceDetailPage() {
   if (!service) {
     return (
       <PublicLayout>
-        <PageMeta title="Service not found" description="The requested treatment page was not found at Dental Cure Clinic." />
+        <PageMeta
+          title="Service not found"
+          description="The requested treatment page was not found at Dental Cure Clinic."
+        />
         <PageHero
           eyebrow="Service not found"
           title="That treatment page does not exist"
-          description="The link may be out of date. You can view all Dental Cure Clinic treatments here."
+          description="The link may be out of date. You can view every Dental Cure Clinic treatment from the services page."
           actions={<ActionLink to="/services">Back to services</ActionLink>}
         />
+        <section className="band">
+          <div className="page-shell">
+            <SectionIntro eyebrow="Treatments" title="Browse the clinic's services" />
+            <ActionLink to="/services" variant="primary">
+              All services
+            </ActionLink>
+          </div>
+        </section>
       </PublicLayout>
     );
   }
@@ -73,109 +84,107 @@ export default function ServiceDetailPage() {
       <PageMeta title={service.name} description={service.short} />
 
       <PageHero
-        eyebrow={`Service · ${service.name}`}
+        eyebrow={`Treatments · ${service.name}`}
         title={service.name}
         description={service.short}
         image={service.image}
         actions={
           <>
             <a href={clinic.phoneHref} className="action-primary">
-              <Phone className="size-4" /> Call about {service.name.toLowerCase()}
+              <Phone className="size-4" aria-hidden="true" /> Call about {service.name.toLowerCase()}
             </a>
             <ActionLink to="/appointment" variant="secondary">
-              Book appointment
-              <ArrowRight className="size-4" />
+              Make Appointment
             </ActionLink>
           </>
         }
       />
 
-      <section className="page-section bg-brand-ivory">
-        <div className="page-shell grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_340px] lg:items-start">
-          <article className="surface-card p-6 sm:p-9">
-            <p className="section-eyebrow">Treatment overview</p>
-            <h2 className="section-title">What {service.name.toLowerCase()} involves</h2>
-            <div className="prose-clinic mt-6 space-y-5">
-              <p>{copy.what}</p>
-              <p>{copy.detail}</p>
-            </div>
+      <section className="band">
+        <div className="page-shell">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start lg:gap-14">
+            <article>
+              <SectionIntro eyebrow="Treatment overview" title={`What ${service.name.toLowerCase()} involves`} />
+              <div className="prose-clinic space-y-5">
+                <p>{copy.what}</p>
+                <p>{copy.detail}</p>
+              </div>
 
-            <div className="mt-9">
-              <p className="section-eyebrow">Included in planning</p>
-              <ul className="mt-5 grid gap-3">
-                {service.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-start gap-3 text-[1.02rem] leading-7 text-brand-deep">
-                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-brand-teal" aria-hidden="true" />
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div className="mt-12">
+                <span className="sub-title">Included in planning</span>
+                <ul className="ct-list mt-7">
+                  {service.benefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className="mt-9 rounded-[24px] border border-brand-teal/15 bg-accent/60 p-6">
-              <p className="section-eyebrow">Suitability</p>
-              <p className="body-text mt-3">
-                Not every patient needs the same treatment. Bring previous records to the appointment so the dentist can
-                confirm whether {service.name.toLowerCase()} is right for your condition.
+              <div className="mt-10 rounded-panel bg-light p-7">
+                <h3 className="text-[1.25rem]">Suitability</h3>
+                <p className="body-text mt-3 max-w-[64ch]">
+                  Not every patient needs the same treatment. Bring previous records to the appointment so the dentist can
+                  confirm whether {service.name.toLowerCase()} is right for your condition.
+                </p>
+              </div>
+            </article>
+
+            <aside className="ink-panel p-7 lg:sticky lg:top-32">
+              <span className="sub-title">Ready to start</span>
+              <h2 className="mt-6 text-[1.5rem] leading-tight text-white">Talk to the dentist first</h2>
+              <p className="mt-4 text-[0.98rem] leading-[1.7] text-light">
+                Send a request for {service.name.toLowerCase()} or call the clinic. The team will confirm the date, time
+                and any X-ray needed before you arrive.
               </p>
-            </div>
-          </article>
-
-          <aside className="ink-panel p-6 sm:p-7">
-            <p className="section-eyebrow text-brand-mint">Ready to start</p>
-            <h2 className="font-display text-2xl font-semibold text-white">Talk to the dentist first</h2>
-            <p className="mt-4 text-sm leading-7 text-white/78">
-              Send an appointment request for {service.name.toLowerCase()} or call the clinic. The team will confirm the
-              date, time and any X-ray needed before you arrive.
-            </p>
-            <div className="mt-6 grid gap-3">
-              <a href={clinic.phoneHref} className="action-primary bg-brand-mint text-brand-deep hover:bg-white">
-                <Phone className="size-4" /> {clinic.phone}
-              </a>
-              <Link to="/appointment" className="action-secondary border-white/30 bg-white/10 text-white hover:bg-white hover:text-brand-deep">
-                Request appointment
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </aside>
+              <div className="mt-7 grid gap-3">
+                <a href={clinic.phoneHref} className="action-primary w-full">
+                  <Phone className="size-4" aria-hidden="true" /> {clinic.phone}
+                </a>
+                <Link to="/appointment" className="action-secondary w-full">
+                  Make Appointment
+                </Link>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 
-      <section className="page-section bg-background">
+      <section className="band band-tuck band-shade">
         <div className="page-shell">
-          <SectionHeading
+          <SectionIntro
             eyebrow="Related treatments"
             title="Other services you may need"
             description="Most treatment plans combine more than one service. Here are two related options."
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {relatedServices.map((item) => (
-              <article key={item.slug} className="surface-card surface-card-hover overflow-hidden">
-                <div className="grid sm:grid-cols-[minmax(0,1fr)_160px]">
-                  <div className="p-6 sm:p-7">
-                    <h3 className="font-display text-2xl font-semibold text-brand-ink">{item.name}</h3>
-                    <p className="body-text mt-3">{item.short}</p>
-                    <Link to={`/services/${item.slug}`} className="action-ghost mt-5 px-0">
-                      View details
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </div>
-                  <img src={item.image} alt={item.name} className="hidden h-full object-cover sm:block" loading="lazy" />
+              <article key={item.slug} className="card-tile surface-hover grid sm:grid-cols-[minmax(0,1fr)_180px]">
+                <div className="p-7">
+                  <h3 className="text-[1.375rem] leading-tight">{item.name}</h3>
+                  <p className="body-text mt-3">{item.short}</p>
+                  <Link to={`/services/${item.slug}`} className="action-ghost mt-5">
+                    Open {item.name.toLowerCase()}
+                  </Link>
                 </div>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="hidden h-full w-full rounded-r-tile object-cover sm:block"
+                  loading="lazy"
+                />
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="page-section bg-brand-ivory">
+      <section className="band">
         <div className="page-shell">
-          <div className="surface-card flex flex-col gap-5 p-7 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-7 rounded-panel bg-light p-7 sm:flex-row sm:items-center sm:justify-between sm:p-10">
             <div>
-              <p className="section-eyebrow">Not the treatment you need?</p>
-              <h2 className="font-display text-2xl font-semibold text-brand-ink">Browse all Dental Cure Clinic services</h2>
+              <span className="sub-title">Not the treatment you need?</span>
+              <h2 className="mt-6 text-[1.75rem] leading-tight">Browse all Dental Cure Clinic services</h2>
             </div>
-            <div className="grid gap-3 sm:flex">
+            <div className="flex flex-wrap gap-3">
               <ActionLink to="/services">All services</ActionLink>
               <a href={clinic.phoneHref} className="action-secondary">
                 Call the clinic

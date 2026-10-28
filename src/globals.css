@@ -1,54 +1,51 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Dental Cure Clinic — design system.
+
+  The visual language follows the Dentox dental template the clinic asked to
+  match: a teal #33A9B1 accent over white, deep pine #1F3D3F for the top bar and
+  dark bands, sage #DEE8DE and pale blue #E2EDF3 for the shaped colour bands,
+  and #050C14 for headings and near-black surfaces. Bands carry a 65px bottom
+  radius and the next band tucks 100px up behind them, which gives the page its
+  stepped-shelf rhythm. Buttons are pills with a dark circular arrow badge;
+  section labels are uppercase and led by a 63px teal rule.
+
+  Type: DM Sans for body and interface, Outfit for headings (a free stand-in for
+  the template's licensed geometric face). Scale: h1 66px, h2 46px, h3 30px,
+  h4 22px, section title 40px, body 16/26.
+*/
+
 @layer base {
   :root {
-    --background: 42 43% 98%;
-    --foreground: 190 34% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 190 34% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 190 34% 12%;
-    --primary: 175 72% 22%;
-    --primary-foreground: 42 43% 98%;
-    --secondary: 40 62% 95%;
-    --secondary-foreground: 182 45% 23%;
-    --muted: 43 28% 93%;
-    --muted-foreground: 190 12% 38%;
-    --accent: 168 72% 94%;
-    --accent-foreground: 177 58% 18%;
-    --destructive: 3 72% 42%;
-    --destructive-foreground: 40 40% 98%;
-    --border: 176 28% 86%;
-    --input: 176 24% 82%;
-    --ring: 175 72% 22%;
-    --radius: 1.4rem;
-    --surface-shadow: 0 28px 70px -48px rgba(15, 118, 110, 0.45);
-    --lift-shadow: 0 34px 90px -58px rgba(15, 63, 60, 0.55);
-  }
+    --background: 0 0% 100%;
+    --foreground: 210 62% 5%; /* #050C14 */
 
-  .dark {
-    --background: 184 42% 7%;
-    --foreground: 45 40% 96%;
-    --card: 183 40% 10%;
-    --card-foreground: 45 40% 96%;
-    --popover: 183 40% 10%;
-    --popover-foreground: 45 40% 96%;
-    --primary: 168 72% 68%;
-    --primary-foreground: 184 42% 7%;
-    --secondary: 183 28% 14%;
-    --secondary-foreground: 45 40% 96%;
-    --muted: 183 24% 15%;
-    --muted-foreground: 176 16% 72%;
-    --accent: 181 35% 16%;
-    --accent-foreground: 45 40% 96%;
-    --destructive: 3 62% 48%;
-    --destructive-foreground: 45 40% 96%;
-    --border: 180 22% 24%;
-    --input: 180 22% 24%;
-    --ring: 168 72% 68%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 62% 5%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 62% 5%;
+
+    --primary: 184 45% 45%; /* #33A9B1 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 184 34% 18%; /* #1F3D3F */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 120 18% 89%; /* #DEE8DE */
+    --muted-foreground: 201 27% 38%; /* #47697B */
+
+    --accent: 184 45% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 359 78% 60%; /* #E84C4E */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 206 13% 87%; /* #D8DDE1 */
+    --input: 206 13% 87%;
+    --ring: 184 45% 45%;
   }
 
   * {
@@ -56,136 +53,506 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
 
+  /*
+   * The navigation floats over the page, so an anchored section has to stop
+   * short of it instead of landing underneath.
+   */
+  [id] {
+    scroll-margin-top: 130px;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "ss01", "cv01", "cv02";
+    @apply bg-background font-sans text-foreground antialiased;
+    font-size: 16px;
+    line-height: 26px;
   }
 
   h1,
   h2,
   h3,
   h4,
-  h5 {
-    @apply font-display text-balance tracking-[-0.02em];
+  h5,
+  h6 {
+    @apply font-display font-semibold;
+    color: #050c14;
+    line-height: 1.3;
   }
 
-  p {
-    @apply text-balance;
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4.125rem); /* 40 → 66 */
+  }
+
+  h2 {
+    font-size: clamp(1.875rem, 3.4vw, 2.875rem); /* 30 → 46 */
+  }
+
+  h3 {
+    font-size: clamp(1.375rem, 2.2vw, 1.875rem); /* 22 → 30 */
+  }
+
+  h4 {
+    font-size: 1.375rem;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    font-size: 1.125rem;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+    outline: 2px solid #157a82;
+    outline-offset: 2px;
   }
 
   ::selection {
-    @apply bg-brand-teal text-white;
+    background: #157a82;
+    color: #fff;
   }
 }
 
 @layer components {
-  .site-shell {
-    @apply bg-background;
-  }
+  /* ------------------------------------------------------------------ layout */
 
   .page-shell {
-    @apply mx-auto w-full max-w-[1120px] px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-shell px-[15px];
+  }
+
+  /* The floating header bar runs closer to the window edge than the content. */
+  .nav-shell {
+    @apply mx-auto w-full max-w-[1425px] px-[15px] sm:px-6 lg:px-[48px];
   }
 
   .page-section {
-    @apply py-16 sm:py-20 lg:py-24;
+    @apply relative py-16 lg:py-[120px];
   }
 
-  .surface-card {
-    @apply rounded-[26px] border border-brand-teal/10 bg-white/95 shadow-[var(--surface-shadow)];
+  .band {
+    @apply page-section z-[1];
   }
 
-  .surface-card-hover {
-    @apply transition duration-500 hover:-translate-y-1 hover:border-brand-teal/25 hover:shadow-[var(--lift-shadow)];
+  /* Bottom corners only. Later bands tuck up behind these. */
+  .band-tail {
+    @apply z-[2];
+    border-bottom-left-radius: 65px;
+    border-bottom-right-radius: 65px;
   }
 
-  .soft-panel {
-    @apply rounded-[24px] border border-brand-teal/10 bg-brand-ivory/70;
+  /* Tucks up behind the previous band so its rounded corners read as a shelf. */
+  .band-tuck {
+    @apply z-[1] mt-[-100px] pt-[100px];
+    border-bottom-left-radius: 65px;
+    border-bottom-right-radius: 65px;
   }
 
-  .ink-panel {
-    @apply rounded-[30px] border border-white/15 bg-brand-deep text-brand-ivory shadow-[var(--lift-shadow)];
+  .band-shade {
+    @apply bg-shade;
   }
 
-  .eyebrow {
-    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-brand-teal/15 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-teal;
+  .band-light {
+    @apply bg-light;
   }
 
+  .band-dark {
+    @apply bg-ink text-white;
+  }
+
+  /* A photograph behind a near-black wash: texture, never the subject. */
+  .band-photo {
+    @apply bg-ink bg-cover bg-center text-white;
+    background-blend-mode: normal;
+  }
+
+  .band-photo::before {
+    content: "";
+    @apply absolute inset-0 z-0 bg-ink/85;
+  }
+
+
+  /*
+   * Page banners fade from pine on the left to clear on the right, so the
+   * headline sits on a solid ground while the photograph stays visible.
+   */
+  .band-photo-hero::before {
+    background-color: transparent;
+    background-image: linear-gradient(180deg, rgba(31, 61, 63, 0.7), rgba(3, 29, 79, 0) 12.88%),
+      linear-gradient(
+        90deg,
+        #1f3d3f 0%,
+        #1f3d3f 20%,
+        rgba(15, 63, 68, 0.5) 45%,
+        rgba(16, 77, 81, 0.36) 55%,
+        rgba(51, 169, 177, 0) 72%
+      );
+  }
+
+  .band-photo > * {
+    @apply relative z-[1];
+  }
+
+  /*
+   * Light text for dark ground. Scoped to the block that carries it rather than
+   * to the band, so the white cards sitting inside a dark band keep dark type.
+   */
+  .tone-light :is(h1, h2, h3, h4, h5, h6) {
+    color: #fff;
+  }
+
+  .tone-light .sub-title {
+    color: #fff;
+  }
+
+  .tone-light .section-title {
+    color: #fff;
+  }
+
+  .tone-light :is(.section-lede, .body-text, .text-muted-foreground) {
+    color: #e2edf3;
+  }
+
+  /* ------------------------------------------------------------- typography */
+
+  .sub-title {
+    @apply relative inline-block pl-[80px] text-[16px] font-semibold uppercase leading-[30px];
+    color: #050c14;
+  }
+
+  .sub-title::before {
+    content: "";
+    @apply absolute left-0 top-1/2 block h-[6px] w-[63px] -translate-y-1/2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='63' height='6' viewBox='0 0 63 6' fill='none'%3E%3Crect y='2.5' width='53' height='1' fill='%2333A9B1'/%3E%3Crect x='57' width='1.4' height='6' rx='.7' fill='%2333A9B1'/%3E%3Crect x='60.4' y='0.6' width='1.4' height='4.2' rx='.7' fill='%2333A9B1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+  }
+
+
+  /* The same rule as a standalone mark. */
+  .rule-tick {
+    display: block;
+    width: 63px;
+    height: 6px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='63' height='6' viewBox='0 0 63 6' fill='none'%3E%3Crect y='2.5' width='53' height='1' fill='%2333A9B1'/%3E%3Crect x='57' width='1.4' height='6' rx='.7' fill='%2333A9B1'/%3E%3Crect x='60.4' y='0.6' width='1.4' height='4.2' rx='.7' fill='%2333A9B1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+  }
+
+  /* Aliases kept so page markup can stay terse. */
+  .section-label,
+  .section-eyebrow,
+  .label {
+    @apply block text-[0.9rem] font-semibold leading-[1.4];
+    color: #050c14;
+  }
+
+  .section-label,
   .section-eyebrow {
-    @apply mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-teal/85;
+    @apply sub-title;
   }
 
-  .section-title {
-    @apply text-[clamp(1.95rem,4.2vw,3.4rem)] font-semibold leading-[1.05] text-brand-ink;
+  .sec-intro {
+    @apply mx-auto mb-[60px] max-w-[800px];
   }
 
-  .section-lede {
-    @apply mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground;
+  .section-title,
+  .sec-title {
+    @apply font-display text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-[1.3];
+    color: #050c14;
+    margin: 20px 0 25px;
   }
 
+  .section-lede,
+  .sec-lede,
   .body-text {
-    @apply text-[1.02rem] leading-[1.75] text-muted-foreground;
+    @apply text-[1rem] leading-[26px];
+    color: #47697b;
+  }
+
+  /* Dark surfaces that sit on a light band carry their own inverse. */
+  .ink-panel .sub-title,
+  .tone-light .sub-title {
+    color: #fff;
+  }
+
+  .ink-panel :is(.body-text, .text-muted-foreground),
+  .tone-light :is(.body-text, .text-muted-foreground) {
+    color: #e2edf3;
+  }
+
+  /* On a dark ground the bright teal is the legible one. */
+  .ink-panel .text-teal,
+  .tone-light .text-teal,
+  .band-dark .text-teal {
+    color: #33a9b1;
+  }
+
+  /* ------------------------------------------------------------------ actions */
+
+  .action-primary,
+  .action-secondary,
+  .action-dark,
+  .action-quiet,
+  .action-ghost {
+    @apply relative inline-flex min-h-[56px] cursor-pointer items-center justify-center gap-[10px] rounded-pill border border-transparent pl-[30px] pr-[5px] text-[16px] font-semibold leading-[24px];
+    transition: all 0.3s ease;
+  }
+
+  .action-primary,
+  .action-dark {
+    @apply py-[5px];
+  }
+
+  .action-primary::after,
+  .action-dark::after {
+    content: "";
+    @apply block size-[46px] shrink-0 rounded-full;
+    background-color: #050c14;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='m13 6 6 6-6 6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .action-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-teal px-6 py-3 text-sm font-semibold text-white shadow-[0_22px_45px_-28px_rgba(15,118,110,0.75)] transition duration-300 hover:bg-brand-deep hover:shadow-[0_28px_55px_-24px_rgba(15,63,60,0.6)];
+    @apply bg-teal text-white;
   }
 
+  .action-primary:hover {
+    @apply bg-teal-deep;
+  }
+
+  .action-dark {
+    @apply bg-ink text-white;
+  }
+
+  /* Bright teal badge with a dark arrow: 7.3:1 on the badge. */
+  .action-dark::after {
+    background-color: #33a9b1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23050c14' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='m13 6 6 6-6 6'/%3E%3C/svg%3E");
+  }
+
+  .action-dark:hover {
+    background-color: #121c27;
+  }
+
+  /* Icon leads the label instead of trailing it. */
+  .action-left {
+    @apply pl-[5px] pr-[30px];
+  }
+
+  .action-left::before {
+    content: "";
+    @apply block size-[46px] shrink-0 rounded-full;
+    background-color: #050c14;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='m13 6 6 6-6 6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .action-left::after {
+    @apply hidden;
+  }
+
+  /* Quieter actions: a hairline pill, no badge. */
   .action-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-brand-teal/25 bg-white/85 px-6 py-3 text-sm font-semibold text-brand-deep transition duration-300 hover:border-brand-teal/50 hover:bg-white;
+    @apply border-hairline bg-white px-[30px] text-ink;
   }
 
-  .action-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-brand-deep transition duration-300 hover:bg-brand-teal/10;
+  .action-secondary:hover {
+    @apply border-teal bg-teal text-white;
   }
 
   .action-quiet {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand-teal/15 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep transition hover:border-brand-teal/40 hover:bg-white;
+    @apply min-h-[44px] border-hairline bg-white px-5 text-[0.9rem] text-ink;
   }
 
-  .field-label {
-    @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep/80;
+  .action-quiet:hover {
+    @apply border-teal text-teal;
   }
 
-  .field-input {
-    @apply w-full rounded-[16px] border border-border bg-white px-4 py-3 text-[0.95rem] text-foreground placeholder:text-muted-foreground/70 focus-visible:border-brand-teal/45;
+  /* Where two actions share one phone-width bar, the badge gives way. */
+  .action-compact {
+    @apply justify-center px-4;
+    white-space: nowrap;
   }
 
-  .error-text {
-    @apply mt-1.5 flex items-center gap-1.5 text-xs font-semibold text-destructive;
+  .action-compact::after {
+    @apply hidden;
+  }
+
+  /*
+    The header's appointment button. Between 1024 and 1279 the eight
+    navigation links leave no room for the arrow badge and the full label,
+    so the button carries its plain label alone; from 1280 up it takes the
+    full pill again. Written after `.action-primary` so the badge rule wins.
+  */
+  .nav-cta {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .nav-cta::after {
+    display: none;
+  }
+
+  @media (min-width: 1280px) {
+    .nav-cta {
+      padding-left: 22px !important;
+      padding-right: 5px !important;
+    }
+
+    .nav-cta::after {
+      display: block;
+    }
+  }
+
+  .action-ghost {
+    @apply min-h-[44px] gap-1.5 border-0 bg-transparent p-0 text-teal underline decoration-teal/30 underline-offset-4;
+  }
+
+  .action-ghost:hover {
+    @apply decoration-teal;
+  }
+
+  /* On dark bands the pill inverts. */
+  .band-dark .action-secondary,
+  .band-photo .action-secondary,
+  .on-deep .action-secondary {
+    @apply border-white/30 bg-white/10 text-white;
+  }
+
+  .band-dark .action-secondary:hover,
+  .band-photo .action-secondary:hover,
+  .on-deep .action-secondary:hover {
+    @apply border-teal-bright bg-teal-bright text-ink;
+  }
+
+  .band-dark .action-ghost,
+  .band-photo .action-ghost,
+  .on-deep .action-ghost {
+    @apply text-white;
+  }
+
+  /* ------------------------------------------------------------------ surfaces */
+
+  /*
+   * The card edge is drawn, not implied by a shadow: these cards also sit on
+   * white bands, where a white card and its soft shadow would otherwise vanish.
+   */
+  .surface-card {
+    @apply bg-white;
+    border: 1px solid rgba(5, 12, 20, 0.09);
+    border-radius: 32px;
+    box-shadow: 0 24px 48px -40px rgba(5, 12, 20, 0.35);
+  }
+
+  .card-tile {
+    @apply bg-white;
+    border-radius: 16px;
+    box-shadow: 0 24px 48px -40px rgba(5, 12, 20, 0.3);
+  }
+
+  /*
+   * The home page's request slip — the only white surface on the sage band.
+   * Its edge is drawn rather than implied: it sits next to a teal button and a
+   * large phone number, so it needs no accent of its own beyond the panel.
+   */
+  .slip {
+    @apply relative rounded-panel bg-white p-6 sm:p-8;
+    border: 1px solid rgba(5, 12, 20, 0.09);
+    box-shadow: 0 34px 60px -50px rgba(5, 12, 20, 0.5);
+  }
+
+  .surface-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .surface-hover:hover {
+    box-shadow: 0 30px 55px -38px rgba(5, 12, 20, 0.45);
+    transform: translateY(-4px);
+  }
+
+  .soft-panel {
+    @apply bg-mist;
+    border-radius: 30px;
+  }
+
+  .ink-panel {
+    @apply bg-ink text-white;
+    border-radius: 30px;
+  }
+
+  /* Blog cards carry the template's asymmetric corner. */
+  .card-blog {
+    @apply bg-white;
+    border-radius: 30px 0 30px 30px;
+    box-shadow: 0 24px 48px -40px rgba(5, 12, 20, 0.3);
   }
 
   .meta-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground;
-  }
-
-  .rule-label {
-    @apply h-px w-full bg-border/70;
+    @apply inline-flex items-center gap-1.5 rounded-pill bg-mist px-3.5 py-1.5 text-[0.82rem] font-semibold text-teal;
   }
 
   .link-underline {
-    @apply underline decoration-brand-teal/35 decoration-2 underline-offset-4 transition hover:decoration-brand-teal;
+    @apply font-semibold text-teal underline decoration-teal/30 underline-offset-4;
+  }
+
+  .link-underline:hover {
+    @apply decoration-teal;
+  }
+
+  /* Persian-style tick list used inside service and feature panels. */
+  .ct-list {
+    @apply space-y-2.5;
+  }
+
+  .ct-list li {
+    @apply relative pl-7 text-[0.95rem] leading-[1.6];
+    color: #47697b;
+  }
+
+  .ct-list li::before {
+    content: "";
+    @apply absolute left-0 top-[0.45em] size-[14px] rounded-full bg-teal/15;
+  }
+
+  .ct-list li::after {
+    content: "";
+    @apply absolute left-[4px] top-[0.72em] h-[5px] w-[7px] rotate-[-45deg] border-b-2 border-l-2 border-teal;
+  }
+
+  /* ------------------------------------------------------------------- forms */
+
+  /*
+   * The pill control the forms use. It lives in the markup as utilities rather
+   * than here, because each UI primitive already sets its own border and radius
+   * and a component-layer class would lose to those utilities.
+   */
+
+  .error-text {
+    @apply mt-2 flex items-center gap-1.5 pl-[25px] text-[0.82rem] font-medium text-destructive;
+  }
+
+  /* ------------------------------------------------------------------- prose */
+
+  .rows > * + * {
+    @apply border-t border-hairline;
   }
 
   .prose-clinic {
-    @apply text-[1.02rem] leading-[1.8] text-muted-foreground;
+    @apply text-[1rem] leading-[1.8];
+    color: #47697b;
   }
 
   .prose-clinic h3 {
-    @apply mb-3 mt-9 text-xl font-semibold text-brand-ink;
+    @apply mb-3 mt-8 text-[1.25rem] font-semibold;
+    color: #050c14;
   }
 
   .prose-clinic ul {
-    @apply mb-6 space-y-2 pl-0;
+    @apply mb-6 space-y-2.5 pl-0;
   }
 
   .prose-clinic li {
@@ -194,90 +561,22 @@
 
   .prose-clinic li::before {
     content: "";
-    @apply absolute left-0 top-[0.62rem] h-2 w-2 rounded-full bg-brand-teal/45;
+    @apply absolute left-0 top-[0.6em] size-1.5 rounded-full bg-teal/50;
   }
 
   .prose-clinic strong {
-    @apply font-semibold text-brand-ink;
-  }
-}
-
-@layer utilities {
-  .text-shadow-luxury {
-    text-shadow: 0 22px 48px rgba(8, 34, 32, 0.28);
-  }
-
-  .animate-rise {
-    animation: rise 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .animate-fade {
-    animation: fade 0.9s ease-out both;
-  }
-
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 22px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  @keyframes fade {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  [data-reveal="fade"] {
-    opacity: 0;
-  }
-
-  [data-reveal="fade"].is-visible {
-    animation: fade 0.78s ease-out forwards;
-  }
-
-  [data-reveal="up"] {
-    opacity: 0;
-  }
-
-  [data-reveal="up"].is-visible {
-    animation: rise 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .delay-100 {
-    animation-delay: 0.1s;
-  }
-
-  .delay-200 {
-    animation-delay: 0.2s;
-  }
-
-  .delay-300 {
-    animation-delay: 0.3s;
-  }
-
-  .delay-400 {
-    animation-delay: 0.4s;
+    @apply font-semibold;
+    color: #050c14;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
-  }
-
-  [data-reveal="fade"],
-  [data-reveal="up"] {
-    opacity: 1 !important;
   }
 }

@@ -1,27 +1,40 @@
 import { cn } from "@/lib/utils";
 
-export function BrandLogo({ light = false, className }: { light?: boolean; className?: string }) {
+/**
+ * Tooth mark plus wordmark. The reference template sets a single tooth glyph
+ * beside the practice name, so the mark stays a plain silhouette rather than a
+ * badge.
+ */
+export function BrandLogo({
+  light = false,
+  className,
+  compact = false,
+}: {
+  light?: boolean;
+  className?: string;
+  compact?: boolean;
+}) {
   return (
-    <span className={cn("inline-flex shrink-0 items-center gap-2.5 align-middle sm:gap-3", className)} aria-label="Dental Cure Clinic">
-      <span
-        className={cn(
-          "grid size-10 place-items-center rounded-2xl border sm:size-11",
-          light ? "border-white/25 bg-white/10" : "border-brand-teal/10 bg-brand-teal",
+    <span className={cn("inline-flex shrink-0 items-center gap-2.5 align-middle", className)}>
+      <svg viewBox="0 0 24 24" className="size-8 shrink-0" aria-hidden="true">
+        <path
+          d="M12 3.2c-2 0-3.1.9-4.7.9-1.4 0-2.5-.5-3.4.6C2.5 6.4 2.7 9.3 3.4 11.8c.5 1.8 1.1 3.1 1.5 4.6.4 1.3.7 2.8 1.6 2.7.9-.1.9-1.8 1.3-3.1.3-1.2.7-2 1.9-2s1.6.8 1.9 2c.4 1.3.4 3 1.3 3.1.9.1 1.2-1.4 1.6-2.7.4-1.5 1-2.8 1.5-4.6.7-2.5.9-5.4-.5-7.1-.9-1.1-2-.6-3.4-.6-1.6 0-2.7-.9-4.7-.9Z"
+          fill={light ? "#FFFFFF" : "#33A9B1"}
+        />
+      </svg>
+      <span className="font-display text-[1.4rem] font-semibold leading-none">
+        <span className={light ? "text-white" : "text-ink"}>Dental</span>
+        <span className={light ? "text-light" : "text-teal"}>Cure</span>
+        {!compact && (
+          <span
+            className={cn(
+              "mt-1 block text-[0.6rem] font-semibold uppercase leading-none tracking-[0.22em]",
+              light ? "text-light/80" : "text-[#5C6B7F]",
+            )}
+          >
+            Clinic Noida
+          </span>
         )}
-      >
-        <svg viewBox="0 0 32 32" className="size-6" aria-hidden="true">
-          <path
-            d="M10 6.5c3.2-1.6 8.8-1.6 12 0 2 .9 2.4 3.5 2 6.1-.3 2-.7 3.4-.9 5.5-.2 2.6-.9 4.4-2.6 4.4-1.6 0-1.8-2.5-3.1-5.1-1.5-3-4.4-3-5.9 0-1.3 2.6-1.5 5.1-3.1 5.1-1.7 0-2.4-1.8-2.6-4.4-.2-2.1-.6-3.5-.9-5.5-.4-2.6 0-5.2 2-6.1Z"
-            fill={light ? "#FFFFFF" : "#FFFFFF"}
-          />
-          <path d="M22 9.5c-2.4-1.2-4.9-.2-5.6 1.6.4 1.9 1.9 3 3.9 3.2 1.3.1 2.3-.4 2.8-1.3-.4-1.3-.7-2.4-1.1-3.5Z" fill="#7EE2D3" />
-        </svg>
-      </span>
-      <span className="leading-none">
-        <span className={cn("block font-display text-[1.08rem] font-semibold tracking-[-0.035em] sm:text-[1.15rem]", light ? "text-white" : "text-brand-ink")}>
-          Dental Cure
-        </span>
-        <span className={cn("mt-1 block text-[9px] font-bold uppercase tracking-[0.26em]", light ? "text-white/65" : "text-brand-teal/75")}>Noida</span>
       </span>
     </span>
   );
